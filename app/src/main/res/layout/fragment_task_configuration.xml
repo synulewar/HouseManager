@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="viewModel"
+                type="com.synowkrz.housemanager.taskConfiguration.TaskConfigurationViewModel" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="match_parent">
+        <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp" tools:src="@tools:sample/avatars"
+                android:id="@+id/imageView"
+                android:layout_marginTop="@dimen/standard_margin"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:setImage="@{viewModel.imageResource}"
+        />
+
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="@string/task_name_hint"
+                android:ems="10"
+                android:id="@+id/editText"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                android:layout_marginTop="@dimen/standard_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        <Button
+                android:text="@string/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_cancel"
+                app:layout_constraintTop_toBottomOf="@+id/editText" android:layout_marginTop="@dimen/standard_margin"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="@dimen/standard_margin"/>
+        <Button
+                android:text="@string/ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_ok"
+                app:layout_constraintTop_toBottomOf="@+id/editText" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:layout_marginEnd="@dimen/standard_margin"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

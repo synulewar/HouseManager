@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/homeMenu">
+    <fragment android:id="@+id/homeMenu" android:name="com.synowkrz.housemanager.homeMenu.HomeMenu"
+              android:label="home_menu_fragment">
+        <action android:id="@+id/action_homeMenu_to_chooserMenu" app:destination="@id/chooserMenu"
+                app:popUpTo="@id/chooserMenu" app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment android:id="@+id/chooserMenu" android:name="com.synowkrz.housemanager.chooserMenu.ChooserMenu"
+              android:label="fragment_chooser_menu">
+        <action android:id="@+id/action_chooserMenu_to_taskConfiguration" app:destination="@id/taskConfiguration"/>
+    </fragment>
+    <fragment android:id="@+id/taskConfiguration"
+              android:name="com.synowkrz.housemanager.taskConfiguration.TaskConfiguration"
+              android:label="fragment_task_configuration" tools:layout="@layout/fragment_task_configuration">
+        <action android:id="@+id/action_taskConfiguration_to_homeMenu" app:destination="@id/homeMenu"/>
+        <argument android:name="taskType" app:argType="com.synowkrz.housemanager.model.TaskTypes"/>
+    </fragment>
+</navigation>
