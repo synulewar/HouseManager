@@ -1,7 +1,6 @@
 package com.synowkrz.housemanager.repository
 
 import android.app.Application
-import androidx.lifecycle.LiveData
 import com.synowkrz.housemanager.database.HouseManagerDatabase
 import com.synowkrz.housemanager.model.TaskGridItem
 import kotlinx.coroutines.Dispatchers
@@ -11,7 +10,8 @@ import java.sql.SQLException
 class HouseRepository(private val app: Application) {
 
     private val database = HouseManagerDatabase.getInstance(app)
-    val items: LiveData<List<TaskGridItem>> = database.taskItemDao.getAllTasks()
+    val items by lazy { database.taskItemDao.getAllTasks() }
+    val babies by lazy { database.babyProfileDao.getAllBabies()}
 
     suspend fun insertTask(taskGridItem: TaskGridItem) {
         withContext(Dispatchers.IO) {
@@ -21,6 +21,12 @@ class HouseRepository(private val app: Application) {
                 TODO("Handle duplicate insert")
                 // insert fail
             }
+        }
+    }
+
+    suspend fun removeTask(taskGridItem: TaskGridItem) {
+        withContext(Dispatchers.IO) {
+            database.taskItemDao.deleteTask(taskGridItem.name)
         }
     }
 }

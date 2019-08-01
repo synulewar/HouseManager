@@ -5,7 +5,6 @@ import androidx.lifecycle.*
 import com.synowkrz.housemanager.convertTypeTaskToResourceString
 import com.synowkrz.housemanager.model.TaskGridItem
 import com.synowkrz.housemanager.model.TaskTypes
-import com.synowkrz.housemanager.repository.HouseRepository
 
 class ChooserMenuViewModel(app: Application): AndroidViewModel(app) {
 
@@ -18,8 +17,6 @@ class ChooserMenuViewModel(app: Application): AndroidViewModel(app) {
     private val _itemAdded = MutableLiveData<TaskTypes>()
     val itemAdded : LiveData<TaskTypes>
         get() = _itemAdded
-
-    private val repository = HouseRepository(app)
 
     init {
         var e1 = TaskGridItem("Kid", convertTypeTaskToResourceString(TaskTypes.BABY), TaskTypes.BABY)

@@ -1,5 +1,6 @@
 package com.synowkrz.housemanager.homeMenu
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.synowkrz.housemanager.TaskGridAdpater
+import com.synowkrz.housemanager.babyTask.BabyActivity
 import com.synowkrz.housemanager.databinding.HomeMenuFragmentBinding
+import com.synowkrz.housemanager.model.TaskGridItem
+import com.synowkrz.housemanager.model.TaskTypes
 
 class HomeMenu : Fragment() {
 
@@ -42,12 +46,25 @@ class HomeMenu : Fragment() {
 
         binding.taskGrid.adapter =
             TaskGridAdpater(TaskGridAdpater.OnClickListener {
-                Toast.makeText(activity, "onClick ${it.name}", Toast.LENGTH_LONG).show()
+                startTaskActivity(it)
             },TaskGridAdpater.OnLongClickListener{
-                Toast.makeText(activity, "onLongClick ${it.name}", Toast.LENGTH_LONG).show()
+                viewModel.onItemLongPress(it)
                 true
             })
 
         return binding.root
+    }
+
+    fun startTaskActivity(taskGridItem: TaskGridItem) {
+        when(taskGridItem.taskType) {
+            TaskTypes.BABY -> {
+                val intent = Intent(activity!!.applicationContext, BabyActivity::class.java)
+                startActivity(intent)
+            }
+            TaskTypes.CALENDAR -> TODO()
+            TaskTypes.SHOP_LIST -> TODO()
+            TaskTypes.TASK_LIST -> TODO()
+            TaskTypes.CUSTOM -> TODO()
+        }
     }
 }

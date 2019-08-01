@@ -6,8 +6,7 @@
     <data>
         <variable
                 name="viewModel"
-                type="com.synowkrz.housemanager.taskConfiguration.TaskConfigurationViewModel" />
-
+                type="com.synowkrz.housemanager.babyTask.babyCreator.BabyProfileCreatorViewModel" />
     </data>
 
 
@@ -21,17 +20,30 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:setImage="@{viewModel.imageResource}"
+                android:src="@drawable/kid"
+                android:contentDescription="@string/choose_photo"
+                android:onClick="@{() -> viewModel.onBabyPhotoClicked()}"
         />
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/dateTextView"
+                  android:text="@string/choose_birth_date"
+                  app:layout_constraintTop_toBottomOf="@+id/babyPhoto"
+                  android:layout_marginTop="@dimen/standard_margin"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  android:onClick="@{() -> viewModel.onDateClicked()}"
+                  />
 
         <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:hint="@string/task_name_hint"
+                android:hint="@string/baby_name_hint"
                 android:ems="10"
-                android:id="@+id/editText"
-                app:layout_constraintTop_toBottomOf="@+id/babyPhoto"
+                android:id="@+id/babyName"
+                app:layout_constraintTop_toBottomOf="@+id/dateTextView"
                 android:layout_marginTop="@dimen/standard_margin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
@@ -40,18 +52,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button_cancel"
-                app:layout_constraintTop_toBottomOf="@+id/editText" android:layout_marginTop="@dimen/standard_margin"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="@dimen/standard_margin"/>
+                app:layout_constraintTop_toBottomOf="@+id/babyName"
+                android:layout_marginTop="@dimen/standard_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="@dimen/standard_margin"/>
         <Button
                 android:text="@string/ok"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button_ok"
-                app:layout_constraintTop_toBottomOf="@+id/editText" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/babyName" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/standard_margin"
                 android:layout_marginEnd="@dimen/standard_margin"/>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
