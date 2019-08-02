@@ -14,4 +14,7 @@
     <string name="choose_photo">Choose baby photo</string>
     <string name="choose_birth_date">Choose birth date</string>
     <string name="read_permission_denied">Photo can not be fetch without permission</string>
+    <string name="empty_baby_name">Baby name can not be empty</string>
+    <string name="not_unique_baby_name">Baby name has to be unique</string>
+    <string name="birthday_not_set_warning">Please set birthday date</string>
 </resources>

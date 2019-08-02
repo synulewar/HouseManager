@@ -1,6 +1,7 @@
 package com.synowkrz.housemanager.repository
 
 import android.app.Application
+import com.synowkrz.housemanager.babyTask.model.BabyProfile
 import com.synowkrz.housemanager.database.HouseManagerDatabase
 import com.synowkrz.housemanager.model.TaskGridItem
 import kotlinx.coroutines.Dispatchers
@@ -12,6 +13,16 @@ class HouseRepository(private val app: Application) {
     private val database = HouseManagerDatabase.getInstance(app)
     val items by lazy { database.taskItemDao.getAllTasks() }
     val babies by lazy { database.babyProfileDao.getAllBabies()}
+
+    suspend fun insertBabyProfile(babyProfile: BabyProfile) {
+        withContext(Dispatchers.IO) {
+            try {
+                database.babyProfileDao.insert(babyProfile)
+            } catch (e: Exception) {
+                TODO()
+            }
+        }
+    }
 
     suspend fun insertTask(taskGridItem: TaskGridItem) {
         withContext(Dispatchers.IO) {
@@ -27,6 +38,18 @@ class HouseRepository(private val app: Application) {
     suspend fun removeTask(taskGridItem: TaskGridItem) {
         withContext(Dispatchers.IO) {
             database.taskItemDao.deleteTask(taskGridItem.name)
+        }
+    }
+
+    suspend fun removeBabyProfile(babyProfile: BabyProfile) {
+        withContext(Dispatchers.IO) {
+            database.babyProfileDao.deleteBaby(babyProfile.name)
+        }
+    }
+
+    suspend fun getAllBabiesData() : List<BabyProfile> {
+        return withContext(Dispatchers.IO) {
+             database.babyProfileDao.getAllBabiesData()
         }
     }
 }

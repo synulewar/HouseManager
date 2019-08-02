@@ -19,7 +19,7 @@ class TaskConfigurationViewModel(app: Application, val taskType: TaskTypes) : An
 
     private val _imageResource = MutableLiveData<String>()
     val imageResource : LiveData<String>
-    get() = _imageResource
+        get() = _imageResource
 
 
     private val _emptyString = MutableLiveData<Boolean>()

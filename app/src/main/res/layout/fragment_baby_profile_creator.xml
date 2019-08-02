@@ -55,7 +55,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/babyName"
                 android:layout_marginTop="@dimen/standard_margin"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="@dimen/standard_margin"/>
+                android:layout_marginStart="@dimen/standard_margin"
+                android:onClick="@{() -> viewModel.onCancelPressed()}"/>
         <Button
                 android:text="@string/ok"
                 android:layout_width="wrap_content"
@@ -63,7 +64,8 @@
                 android:id="@+id/button_ok"
                 app:layout_constraintTop_toBottomOf="@+id/babyName" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/standard_margin"
-                android:layout_marginEnd="@dimen/standard_margin"/>
+                android:layout_marginEnd="@dimen/standard_margin"
+                android:onClick="@{() -> viewModel.onOKPressed()}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

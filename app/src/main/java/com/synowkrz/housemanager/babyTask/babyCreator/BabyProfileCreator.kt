@@ -12,12 +12,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
-import android.widget.Toast
 import androidx.core.content.PermissionChecker
 import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.synowkrz.housemanager.R
 import com.synowkrz.housemanager.databinding.FragmentBabyProfileCreatorBinding
@@ -69,6 +69,52 @@ class BabyProfileCreator : Fragment() {
                 viewModel.onBabyPhotoClickedFinished()
             }
         })
+
+        viewModel.okPressed.observe(this, Observer {
+            if (it) {
+                viewModel.addNewBabyProfile(binding.babyName.text.toString(), binding.dateTextView.text.toString())
+                viewModel.onOkPressedFinished()
+            }
+        })
+
+        viewModel.cancelPressed.observe(this, Observer {
+            if (it) {
+                viewModel.onCancelPressedFinished()
+                findNavController().navigate(BabyProfileCreatorDirections.actionBabyProfileCreatorToBabyMainMenu())
+            }
+        })
+
+        viewModel.emptyString.observe(this, Observer {
+            if (it) {
+                Snackbar.make(binding.root,
+                    activity!!.getString(R.string.empty_baby_name), Snackbar.LENGTH_LONG).show()
+                viewModel.onEmptyStringFinshed()
+            }
+        })
+
+        viewModel.nameNotUnique.observe(this, Observer {
+            if (it) {
+                Snackbar.make(binding.root,
+                    activity!!.getString(R.string.empty_baby_name), Snackbar.LENGTH_LONG).show()
+                viewModel.onNameNotUniqueFinished()
+            }
+        })
+
+        viewModel.itemAdded.observe(this, Observer {
+            if (it) {
+                viewModel.onItemAddedCompleted()
+                findNavController().navigate(BabyProfileCreatorDirections.actionBabyProfileCreatorToBabyMainMenu())
+            }
+        })
+
+        viewModel.birthDateNotSet.observe(this, Observer {
+            if (it) {
+                Snackbar.make(binding.root,
+                    activity!!.getString(R.string.birthday_not_set_warning), Snackbar.LENGTH_LONG).show()
+                viewModel.onBirthDayNotSetCompleted()
+            }
+        })
+
         return binding.root
     }
 
@@ -125,8 +171,9 @@ class BabyProfileCreator : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
-            Toast.makeText(activity!!.application, data?.data.toString(), Toast.LENGTH_LONG).show()
-            binding.babyPhoto.setImageURI(data?.data)
+            val uri = data?.data
+            binding.babyPhoto.setImageURI(uri)
+            viewModel.onPhotoDataReceived(uri)
         }
     }
 }

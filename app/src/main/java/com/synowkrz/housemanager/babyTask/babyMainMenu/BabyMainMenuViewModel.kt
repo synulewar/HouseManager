@@ -7,6 +7,7 @@ import com.synowkrz.housemanager.repository.HouseRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class BabyMainMenuViewModel(app: Application) : AndroidViewModel(app) {
 
@@ -31,6 +32,12 @@ class BabyMainMenuViewModel(app: Application) : AndroidViewModel(app) {
 
     fun onAddBabyFinished() {
         _addBaby.value = false
+    }
+
+    fun removeBabyProfile(babyProfile: BabyProfile) {
+        viewModelScope.launch {
+            repository.removeBabyProfile(babyProfile)
+        }
     }
 
     class Factory(val app: Application) : ViewModelProvider.Factory {

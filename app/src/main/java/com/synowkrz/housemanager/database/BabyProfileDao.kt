@@ -20,4 +20,10 @@ interface BabyProfileDao {
 
     @Query("SELECT * FROM baby_profile")
     fun getAllBabies(): LiveData<List<BabyProfile>>
+
+    @Query("SELECT * FROM baby_profile")
+    fun getAllBabiesData(): List<BabyProfile>
+
+    @Query("SELECT * FROM baby_profile WHERE name = :name")
+    fun getBabyByName(name: String) : BabyProfile?
 }
