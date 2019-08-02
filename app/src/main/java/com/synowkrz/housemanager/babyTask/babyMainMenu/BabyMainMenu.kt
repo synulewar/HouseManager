@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.synowkrz.housemanager.babyTask.model.BabyProfile
 import com.synowkrz.housemanager.databinding.FragmentBabyMainMenuBinding
 
 class BabyMainMenu : Fragment() {
@@ -28,6 +29,7 @@ class BabyMainMenu : Fragment() {
         binding.setLifecycleOwner(this)
         binding.viewModel = viewModel
         binding.babyGrid.adapter = BabyGridAdpater(BabyGridAdpater.OnClickListener{
+            startBabyManager(it)
         }, BabyGridAdpater.OnLongClickListener {
             viewModel.removeBabyProfile(it)
             true
@@ -41,5 +43,9 @@ class BabyMainMenu : Fragment() {
         })
 
         return binding.root
+    }
+
+    private fun startBabyManager(babyProfile: BabyProfile) {
+        findNavController().navigate(BabyMainMenuDirections.actionBabyMainMenuToBabyManger(babyProfile.name))
     }
 }

@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nav_graph_baby" app:startDestination="@id/babyMainMenu">
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph_baby" app:startDestination="@id/babyMainMenu">
 
     <fragment android:id="@+id/babyMainMenu" android:name="com.synowkrz.housemanager.babyTask.babyMainMenu.BabyMainMenu"
               android:label="BabyMainMenu">
         <action android:id="@+id/action_babyMainMenu_to_babyProfileCreator" app:destination="@id/babyProfileCreator"/>
+        <action android:id="@+id/action_babyMainMenu_to_babyManger" app:destination="@id/babyManger"/>
     </fragment>
     <fragment android:id="@+id/babyProfileCreator"
               android:name="com.synowkrz.housemanager.babyTask.babyCreator.BabyProfileCreator"
               android:label="BabyProfileCreator">
         <action android:id="@+id/action_babyProfileCreator_to_babyMainMenu" app:destination="@id/babyMainMenu"/>
+    </fragment>
+    <fragment android:id="@+id/babyManger" android:name="com.synowkrz.housemanager.babyTask.BabyManager.BabyManger"
+              android:label="fragment_baby_manger" tools:layout="@layout/fragment_baby_manger">
+        <argument android:name="babyProfile" app:argType="string"/>
     </fragment>
 </navigation>

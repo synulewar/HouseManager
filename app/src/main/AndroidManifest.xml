@@ -13,8 +13,7 @@
             android:theme="@style/AppTheme">
         <activity
                 android:name=".babyTask.BabyActivity"
-                android:label="@string/title_activity_baby"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:label="@string/title_activity_baby">
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>

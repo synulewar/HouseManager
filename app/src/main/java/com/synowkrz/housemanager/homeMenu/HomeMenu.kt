@@ -46,6 +46,7 @@ class HomeMenu : Fragment() {
 
         binding.taskGrid.adapter =
             TaskGridAdpater(TaskGridAdpater.OnClickListener {
+              //TODO("Change it to mach mvvm model")
                 startTaskActivity(it)
             },TaskGridAdpater.OnLongClickListener{
                 viewModel.onItemLongPress(it)
