@@ -3,9 +3,12 @@ package com.synowkrz.housemanager
 import android.graphics.BitmapFactory
 import android.util.Log
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.synowkrz.housemanager.babyTask.babyMainMenu.BabyGridAdpater
+import com.synowkrz.housemanager.babyTask.babyManager.BabyActionGridAdapter
+import com.synowkrz.housemanager.babyTask.model.BasicBabyEvent
 import com.synowkrz.housemanager.babyTask.model.BabyProfile
 import com.synowkrz.housemanager.model.TaskGridItem
 import java.io.File
@@ -22,14 +25,26 @@ fun bindRecyclerViewBaby(recyclerView: RecyclerView, data: List<BabyProfile>?) {
     adapter.submitList(data)
 }
 
+@BindingAdapter("babyActionListData")
+fun bindRecyclerViewBabyAction(recyclerView: RecyclerView, data: List<BasicBabyEvent>?) {
+    val adapter = recyclerView.adapter as BabyActionGridAdapter
+    adapter.submitList(data)
+}
+
 
 @BindingAdapter("setImage")
 fun bindImageView(imageView: ImageView, data: String) {
+    Log.d("KRZYSIO", data)
     var resource= when (data) {
         "kid" -> R.drawable.kid
         "calendar" -> R.drawable.calendar
         "shoplist" -> R.drawable.shoplist
         "tasklist" -> R.drawable.tasklist
+        "bath" -> R.drawable.bath
+        "feed" -> R.drawable.feed
+        "sleep" -> R.drawable.sleep
+        "diaper" -> R.drawable.diaper
+        "pills" -> R.drawable.pills
         else -> R.drawable.defaultpic
     }
     imageView.setImageResource(resource)
@@ -37,7 +52,6 @@ fun bindImageView(imageView: ImageView, data: String) {
 
 @BindingAdapter("setBabyPhoto")
 fun bindImageViewBabyPhoto(imageView: ImageView, data: String) {
-    Log.d("KRZYS", data)
     if (data == "kid") {
         imageView.setImageResource(R.drawable.kid)
     } else {
@@ -46,4 +60,28 @@ fun bindImageViewBabyPhoto(imageView: ImageView, data: String) {
             imageView.setImageBitmap(BitmapFactory.decodeFile(data))
         }
     }
+}
+
+
+@BindingAdapter("setBabyPhoto")
+fun bindImageViewBabyPhoto(imageView: ImageView, data: BabyProfile?) {
+    if (data == null) {
+        return
+    }
+    if (data.photo == "kid") {
+        imageView.setImageResource(R.drawable.kid)
+    } else {
+        var photo = File(data.photo)
+        if (photo.exists()) {
+            imageView.setImageBitmap(BitmapFactory.decodeFile(data.photo))
+        }
+    }
+}
+
+@BindingAdapter("setBabyName")
+fun bindTextViewWithBabyName(textView: TextView, data: BabyProfile?) {
+    if (data == null) {
+        return
+    }
+    textView.text = data.name
 }

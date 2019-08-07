@@ -1,4 +1,4 @@
-package com.synowkrz.housemanager.babyTask.BabyManager
+package com.synowkrz.housemanager.babyTask.feeding
 
 
 import android.os.Bundle
@@ -7,26 +7,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.synowkrz.housemanager.databinding.FragmentBabyMangerBinding
+import com.synowkrz.housemanager.databinding.FragmentFeedingBinding
 
 
-class BabyManger : Fragment() {
+class FeedingFragment : Fragment() {
 
-    private val viewModel: BabyManagerViewModel by lazy {
+    private val viewModel: FeedingViewModel by lazy {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        ViewModelProviders.of(this, BabyManagerViewModel.Factory(activity.application))
-            .get(BabyManagerViewModel::class.java)
+        ViewModelProviders.of(this, FeedingViewModel.Factory(activity.application))
+            .get(FeedingViewModel::class.java)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
-        val binding = FragmentBabyMangerBinding.inflate(inflater)
-
-
+        val binding = FragmentFeedingBinding.inflate(inflater)
+        binding.viewModel = viewModel
         return binding.root
     }
+
+
 }

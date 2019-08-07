@@ -2,8 +2,26 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.synowkrz.housemanager.babyTask.BabyActivity">
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
-          android:orderInCategory="100"
-          app:showAsAction="never"/>
+    <group android:checkableBehavior="single">
+
+        <item
+                android:id="@+id/baby_profile"
+                android:icon="@drawable/ic_profile"
+                android:title="@string/profile" />
+
+        <item
+                android:id="@+id/baby_manager"
+                android:icon="@drawable/ic_action_grid"
+                android:title="@string/actions" />
+
+        <item
+                android:id="@+id/baby_charts"
+                android:icon="@drawable/ic_charts"
+                android:title="@string/charts" />
+
+        <item
+                android:id="@+id/baby_close"
+                android:icon="@drawable/ic_close"
+                android:title="@string/charts" />
+    </group>
 </menu>

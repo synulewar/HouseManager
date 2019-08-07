@@ -13,8 +13,12 @@
               android:label="BabyProfileCreator">
         <action android:id="@+id/action_babyProfileCreator_to_babyMainMenu" app:destination="@id/babyMainMenu"/>
     </fragment>
-    <fragment android:id="@+id/babyManger" android:name="com.synowkrz.housemanager.babyTask.BabyManager.BabyManger"
+    <fragment android:id="@+id/babyManger" android:name="com.synowkrz.housemanager.babyTask.babyManager.BabyManager"
               android:label="fragment_baby_manger" tools:layout="@layout/fragment_baby_manger">
         <argument android:name="babyProfile" app:argType="string"/>
+        <action android:id="@+id/action_babyManger_to_feedingFragment" app:destination="@id/feedingFragment"/>
     </fragment>
+    <fragment android:id="@+id/feedingFragment"
+              android:name="com.synowkrz.housemanager.babyTask.feeding.FeedingFragment"
+              android:label="FeedingFragment"/>
 </navigation>

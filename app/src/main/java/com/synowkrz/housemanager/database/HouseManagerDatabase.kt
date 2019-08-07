@@ -3,6 +3,7 @@ package com.synowkrz.housemanager.database
 import android.content.Context
 
 import androidx.room.*
+import com.synowkrz.housemanager.babyTask.model.EventType
 import com.synowkrz.housemanager.babyTask.model.BabyProfile
 import com.synowkrz.housemanager.babyTask.model.FeedingType
 import com.synowkrz.housemanager.model.TaskGridItem
@@ -55,5 +56,15 @@ class CustomConverters {
     @TypeConverter
     fun feedingTypeToString(feedingType: FeedingType) : String {
         return feedingType.toString()
+    }
+
+    @TypeConverter
+    fun actionTypeToString(eventType: EventType) : String {
+        return eventType.toString()
+    }
+
+    @TypeConverter
+    fun stringToActionType(value: String) : EventType {
+        return EventType.valueOf(value)
     }
 }

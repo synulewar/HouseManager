@@ -15,5 +15,4 @@ class Feeding(@PrimaryKey(autoGenerate = true)
               val feedingType: FeedingType,
               var startTime : Long = 0,
               var endTime : Long = 0,
-              var duration: Long = 0,
               var amount: Int = 0)

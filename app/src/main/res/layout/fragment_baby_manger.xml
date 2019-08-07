@@ -3,10 +3,57 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+                name="viewModel"
+                type="com.synowkrz.housemanager.babyTask.babyManager.BabyManagerViewModel" />
+    </data>
 
-    <androidx.drawerlayout.widget.DrawerLayout android:layout_width="match_parent"
-                                               android:layout_height="match_parent">
-        
 
-    </androidx.drawerlayout.widget.DrawerLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                       android:layout_height="match_parent">
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      app:layout_constraintTop_toTopOf="parent"
+                      app:layout_constraintStart_toStartOf="parent"
+                      android:orientation="horizontal"
+                      android:layout_margin="@dimen/standard_margin"
+                      android:id="@+id/baby_info">
+
+            <ImageView android:layout_width="100dp"
+                       android:layout_height="100dp"
+                       android:id="@+id/baby_image"
+                       app:setBabyPhoto="@{viewModel.currentProfile}"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_margin="@dimen/standard_margin"
+                      app:setBabyName="@{viewModel.currentProfile}"
+                      android:textSize="@dimen/larger_text_size"/>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/baby_action_grid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/frame_padding"
+                android:clipToPadding="false"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/baby_info"
+                app:spanCount="1"
+                app:babyActionListData="@{viewModel.itemList}"
+                android:orientation="horizontal"
+                tools:itemCount="8"
+                tools:listitem="@layout/baby_action_grid_view">
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 </layout>

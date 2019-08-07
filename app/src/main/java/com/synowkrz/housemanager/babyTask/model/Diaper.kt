@@ -13,5 +13,4 @@ class Diaper(@PrimaryKey(autoGenerate = true)
              val id: Int,
              val profileName: String,
              val diperType: DiperType,
-             val day: String,
-             val time: String)
+             val startTime: Long)

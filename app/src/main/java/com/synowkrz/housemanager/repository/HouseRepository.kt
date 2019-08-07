@@ -52,4 +52,10 @@ class HouseRepository(private val app: Application) {
              database.babyProfileDao.getAllBabiesData()
         }
     }
+
+    suspend fun getBabyProfile(name: String) : BabyProfile? {
+        return withContext(Dispatchers.IO) {
+            database.babyProfileDao.getBabyByName(name)
+        }
+    }
 }

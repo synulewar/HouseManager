@@ -17,4 +17,7 @@
     <string name="empty_baby_name">Baby name can not be empty</string>
     <string name="not_unique_baby_name">Baby name has to be unique</string>
     <string name="birthday_not_set_warning">Please set birthday date</string>
+    <string name="profile">Profile</string>
+    <string name="actions">Actions</string>
+    <string name="charts">Charts</string>
 </resources>
