@@ -1,15 +1,17 @@
 package com.synowkrz.housemanager
 
 import android.graphics.BitmapFactory
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.synowkrz.housemanager.babyTask.BabyEventListAdapter
 import com.synowkrz.housemanager.babyTask.babyMainMenu.BabyGridAdpater
 import com.synowkrz.housemanager.babyTask.babyManager.BabyActionGridAdapter
-import com.synowkrz.housemanager.babyTask.model.BasicBabyEvent
+import com.synowkrz.housemanager.babyTask.model.BabyEvent
 import com.synowkrz.housemanager.babyTask.model.BabyProfile
+import com.synowkrz.housemanager.babyTask.model.BasicBabyEvent
+import com.synowkrz.housemanager.babyTask.model.FeedingType
 import com.synowkrz.housemanager.model.TaskGridItem
 import java.io.File
 
@@ -32,22 +34,16 @@ fun bindRecyclerViewBabyAction(recyclerView: RecyclerView, data: List<BasicBabyE
 }
 
 
+@BindingAdapter("babyEventListData")
+fun bindRecyclerViewBabyEvent(recyclerView: RecyclerView, data: List<BabyEvent>?) {
+    val adapter = recyclerView.adapter as BabyEventListAdapter
+    adapter.submitList(data)
+}
+
+
 @BindingAdapter("setImage")
 fun bindImageView(imageView: ImageView, data: String) {
-    Log.d("KRZYSIO", data)
-    var resource= when (data) {
-        "kid" -> R.drawable.kid
-        "calendar" -> R.drawable.calendar
-        "shoplist" -> R.drawable.shoplist
-        "tasklist" -> R.drawable.tasklist
-        "bath" -> R.drawable.bath
-        "feed" -> R.drawable.feed
-        "sleep" -> R.drawable.sleep
-        "diaper" -> R.drawable.diaper
-        "pills" -> R.drawable.pills
-        else -> R.drawable.defaultpic
-    }
-    imageView.setImageResource(resource)
+    imageView.setImageResource(trasformStringIntoResource(data))
 }
 
 @BindingAdapter("setBabyPhoto")
@@ -84,4 +80,28 @@ fun bindTextViewWithBabyName(textView: TextView, data: BabyProfile?) {
         return
     }
     textView.text = data.name
+}
+
+fun trasformStringIntoResource(data: String) : Int {
+    return when (data) {
+        "kid" -> R.drawable.kid
+        "calendar" -> R.drawable.calendar
+        "shoplist" -> R.drawable.shoplist
+        "tasklist" -> R.drawable.tasklist
+        "bath" -> R.drawable.bath
+        "feed" -> R.drawable.feed
+        "sleep" -> R.drawable.sleep
+        "diaper" -> R.drawable.diaper
+        "pills" -> R.drawable.pills
+        else -> R.drawable.defaultpic
+    }
+}
+
+fun transformFeedingTypeIntoImageResource(feedingType: FeedingType) : Int {
+    return when(feedingType) {
+        FeedingType.LEFT -> R.drawable.left
+        FeedingType.RIGHT -> R.drawable.right
+        FeedingType.BOTTLE -> R.drawable.bottle
+        FeedingType.SOLID -> R.drawable.solid
+    }
 }

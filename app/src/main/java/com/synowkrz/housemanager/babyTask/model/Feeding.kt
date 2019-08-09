@@ -9,10 +9,10 @@ enum class FeedingType {
 }
 
 @Entity(tableName = "feeding_table")
-class Feeding(@PrimaryKey(autoGenerate = true)
-              val id: Int,
-              val profilName: String,
+class Feeding(@PrimaryKey
+              var startTime : Long,
+              val profielName: String,
               val feedingType: FeedingType,
-              var startTime : Long = 0,
               var endTime : Long = 0,
+              var duration: Long = 0,
               var amount: Int = 0)

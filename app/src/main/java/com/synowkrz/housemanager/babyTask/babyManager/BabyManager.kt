@@ -21,13 +21,13 @@ import com.synowkrz.housemanager.databinding.FragmentBabyMangerBinding
 class BabyManager : Fragment() {
 
     private lateinit var viewModel: BabyManagerViewModel
+    private lateinit var name : String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
-
-        val name = BabyManagerArgs.fromBundle(arguments!!).babyProfile
+        name = BabyManagerArgs.fromBundle(arguments!!).babyProfile
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
@@ -42,7 +42,7 @@ class BabyManager : Fragment() {
         binding.viewModel = viewModel
         binding.babyActionGrid.adapter = BabyActionGridAdapter(BabyActionGridAdapter.OnClickListener {
             if (it.eventType == EventType.FEED) {
-                findNavController().navigate(BabyManagerDirections.actionBabyMangerToFeedingFragment())
+                findNavController().navigate(BabyManagerDirections.actionBabyMangerToFeedingFragment(name))
             }
         })
         (activity as BabyActivity).supportActionBar?.title = "BabyManager"

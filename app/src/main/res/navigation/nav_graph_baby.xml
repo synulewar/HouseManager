@@ -20,5 +20,7 @@
     </fragment>
     <fragment android:id="@+id/feedingFragment"
               android:name="com.synowkrz.housemanager.babyTask.feeding.FeedingFragment"
-              android:label="FeedingFragment"/>
+              android:label="FeedingFragment">
+        <argument android:name="profileName" app:argType="string"/>
+    </fragment>
 </navigation>

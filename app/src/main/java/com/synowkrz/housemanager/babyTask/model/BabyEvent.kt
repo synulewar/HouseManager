@@ -15,9 +15,10 @@ data class BasicBabyEvent(val eventType: EventType)
     }
 }
 
-data class BabyEvent(val eventType:  EventType, var startTime : Long = 0) {
+data class BabyEvent(val eventType:  EventType, var startTime : Long, var profile: String) {
     var babyEvent = BasicBabyEvent(eventType)
     var subType: String? = null
     var endTime : Long? = null
+    var duration: Long? = null
     var amount: Int = 0
 }

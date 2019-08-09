@@ -20,4 +20,9 @@
     <string name="profile">Profile</string>
     <string name="actions">Actions</string>
     <string name="charts">Charts</string>
+    <string name="start">start</string>
+    <string name="stop">stop</string>
+    <string name="pause">pause</string>
+    <string name="eat">eats</string>
+    <string name="wait">is waiting</string>
 </resources>

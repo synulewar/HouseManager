@@ -1,7 +1,9 @@
 package com.synowkrz.housemanager.repository
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import com.synowkrz.housemanager.babyTask.model.BabyProfile
+import com.synowkrz.housemanager.babyTask.model.Feeding
 import com.synowkrz.housemanager.database.HouseManagerDatabase
 import com.synowkrz.housemanager.model.TaskGridItem
 import kotlinx.coroutines.Dispatchers
@@ -57,5 +59,19 @@ class HouseRepository(private val app: Application) {
         return withContext(Dispatchers.IO) {
             database.babyProfileDao.getBabyByName(name)
         }
+    }
+
+    suspend fun insertFeeding(feeding: Feeding) {
+        withContext(Dispatchers.IO) {
+            database.feedingDao.insert(feeding)
+        }
+    }
+
+    fun getAllFeedings() : LiveData<List<Feeding>> {
+        return database.feedingDao.getAllFeedings()
+    }
+
+    fun getAllFeedingsByName(name: String) : LiveData<List<Feeding>> {
+        return database.feedingDao.getAllFeedingsByName(name)
     }
 }

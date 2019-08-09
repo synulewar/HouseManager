@@ -1,20 +1,21 @@
 package com.synowkrz.housemanager.database
 
 import android.content.Context
-
 import androidx.room.*
-import com.synowkrz.housemanager.babyTask.model.EventType
 import com.synowkrz.housemanager.babyTask.model.BabyProfile
+import com.synowkrz.housemanager.babyTask.model.EventType
+import com.synowkrz.housemanager.babyTask.model.Feeding
 import com.synowkrz.housemanager.babyTask.model.FeedingType
 import com.synowkrz.housemanager.model.TaskGridItem
 import com.synowkrz.housemanager.model.TaskTypes
 
-@Database(entities = [TaskGridItem::class, BabyProfile::class], version = 1, exportSchema = false)
+@Database(entities = [TaskGridItem::class, BabyProfile::class, Feeding::class], version = 1, exportSchema = false)
 @TypeConverters(CustomConverters::class)
 abstract class HouseManagerDatabase: RoomDatabase() {
 
     abstract val taskItemDao: TaskItemDao
     abstract val babyProfileDao: BabyProfileDao
+    abstract val feedingDao: FeedingDao
 
     companion object {
         @Volatile
