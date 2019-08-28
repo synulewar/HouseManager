@@ -12,12 +12,17 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
+                android:name=".shopList.ShopListActivity"
+                android:label="@string/title_activity_shop_list">
+        </activity>
+        <activity
                 android:name=".babyTask.BabyActivity"
                 android:label="@string/title_activity_baby">
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>

@@ -81,4 +81,6 @@ dependencies {
     implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
 
     implementation "com.google.android.material:material:$version_material"
+
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
 }

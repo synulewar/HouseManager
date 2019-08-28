@@ -8,14 +8,19 @@ import com.synowkrz.housemanager.babyTask.model.Feeding
 import com.synowkrz.housemanager.babyTask.model.FeedingType
 import com.synowkrz.housemanager.model.TaskGridItem
 import com.synowkrz.housemanager.model.TaskTypes
+import com.synowkrz.housemanager.shopList.model.*
 
-@Database(entities = [TaskGridItem::class, BabyProfile::class, Feeding::class], version = 1, exportSchema = false)
+@Database(entities = [TaskGridItem::class, BabyProfile::class, Feeding::class, ShopList::class, PersistentShopItem::class, ShopItem::class],
+    version = 1, exportSchema = false)
 @TypeConverters(CustomConverters::class)
 abstract class HouseManagerDatabase: RoomDatabase() {
 
     abstract val taskItemDao: TaskItemDao
     abstract val babyProfileDao: BabyProfileDao
     abstract val feedingDao: FeedingDao
+    abstract val shopListDao: ShopListDao
+    abstract val persistentShopItemDao : PersistentShopItemDao
+    abstract val shopItemDao : ShopItemDao
 
     companion object {
         @Volatile
@@ -67,5 +72,25 @@ class CustomConverters {
     @TypeConverter
     fun stringToActionType(value: String) : EventType {
         return EventType.valueOf(value)
+    }
+
+    @TypeConverter
+    fun measurmentsToString(measurements: Measurements) : String {
+        return measurements.toString()
+    }
+
+    @TypeConverter
+    fun stringToMeasurment(value: String) : Measurements {
+        return Measurements.valueOf(value)
+    }
+
+    @TypeConverter
+    fun categoryToString(category: Category) : String {
+        return category.toString()
+    }
+
+    @TypeConverter
+    fun stringToCategory(value: String) : Category {
+        return Category.valueOf(value)
     }
 }

@@ -15,6 +15,7 @@ import com.synowkrz.housemanager.babyTask.BabyActivity
 import com.synowkrz.housemanager.databinding.HomeMenuFragmentBinding
 import com.synowkrz.housemanager.model.TaskGridItem
 import com.synowkrz.housemanager.model.TaskTypes
+import com.synowkrz.housemanager.shopList.ShopListActivity
 
 class HomeMenu : Fragment() {
 
@@ -63,7 +64,10 @@ class HomeMenu : Fragment() {
                 startActivity(intent)
             }
             TaskTypes.CALENDAR -> TODO()
-            TaskTypes.SHOP_LIST -> TODO()
+            TaskTypes.SHOP_LIST -> {
+                val intent = Intent(activity!!.applicationContext, ShopListActivity::class.java)
+                startActivity(intent)
+            }
             TaskTypes.TASK_LIST -> TODO()
             TaskTypes.CUSTOM -> TODO()
         }

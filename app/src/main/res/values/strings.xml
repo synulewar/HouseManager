@@ -25,4 +25,97 @@
     <string name="pause">pause</string>
     <string name="eat">eats</string>
     <string name="wait">is waiting</string>
+    <string name="title_activity_shop_list">ShopListActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="new_shop_list">Enter new list name</string>
+    <string name="new_list_title">Add new list</string>
+    <string name="bread">bread</string>
+    <string name="bun">bun</string>
+    <string name="muffin">muffin</string>
+    <string name="baguette">baguette</string>
+    <string name="tomato">tomato</string>
+    <string name="potato">potato</string>
+    <string name="cucumber">cucumber</string>
+    <string name="onion">onion</string>
+    <string name="garlic">garilic</string>
+    <string name="pepper">pepper</string>
+    <string name="apple">apple</string>
+    <string name="banana">banana</string>
+    <string name="strawberries">strawberries</string>
+    <string name="ham">ham</string>
+    <string name="chicken_fillets">chicken fillets</string>
+    <string name="minced_meat">minced meat</string>
+    <string name="pork_neck">pork neck</string>
+    <string name="sausage">sausage</string>
+    <string name="frankfurter">frankfurter</string>
+    <string name="egg">egg</string>
+    <string name="milk">milk</string>
+    <string name="cheese">cheese</string>
+    <string name="white_cheese">white cheese</string>
+    <string name="beer">beer</string>
+    <string name="vodka">vodka</string>
+    <string name="whisky">whisky</string>
+    <string name="beer_free">alcohol free beer</string>
+    <string name="cookies">cookies</string>
+    <string name="sweets">sweets</string>
+    <string name="chocolate">chocolate</string>
+    <string name="jelly">jelly</string>
+    <string name="chips">chips</string>
+    <string name="bread_sticks">breadsticks</string>
+    <string name="peanuts">peanuts</string>
+    <string name="crackers">crackers</string>
+    <string name="tissue">tissue</string>
+    <string name="wipes">wipes</string>
+    <string name="diaper">diaper</string>
+    <string name="toilet_paper">toilet_paper</string>
+    <string name="soap">soap</string>
+    <string name="shower_gel">shower gel</string>
+    <string name="tooth_paste">tooth paste</string>
+    <string name="shop_list">Lists</string>
+    <string name="shop_items">Products</string>
+    <string name="shop_paths">Shops</string>
+    <string name="add_product">Add product</string>
+    <string name="bought_products">Show bought products </string>
+    <string name="close">close</string>
+    <string name="add_new_product">Add new product</string>
+    <string name="new_product_name">Product name</string>
+    <string name="water">water</string>
+    <string name="bread_category">Bread</string>
+    <string name="fruit_vegetables_category">Fruit and vegetables</string>
+    <string name="meat_category">Meat</string>
+    <string name="dairy_category">Dairy</string>
+    <string name="alcohol_category">Alcohol</string>
+    <string name="sweets_category">Sweets</string>
+    <string name="snacks_category">Snacks</string>
+    <string name="hygiene_category">Hygiene</string>
+    <string name="drinkables_category">Drinkables</string>
+    <string name="default_amount">Default amount</string>
+
+
+    <string name="weight">Weight</string>
+    <string name="volume">Volume</string>
+    <string name="quantity">Quantity</string>
+
+
+
+    <string-array name="category_list">
+        <item>@string/bread_category</item>
+        <item>@string/fruit_vegetables_category</item>
+        <item>@string/meat_category</item>
+        <item>@string/dairy_category</item>
+        <item>@string/alcohol_category</item>
+        <item>@string/sweets_category</item>
+        <item>@string/snacks_category</item>
+        <item>@string/hygiene_category</item>
+        <item>@string/drinkables_category</item>
+    </string-array>
+
+    <string-array name="measurment_list">
+        <item>@string/weight</item>
+        <item>@string/volume</item>
+        <item>@string/quantity</item>
+    </string-array>
+
 </resources>

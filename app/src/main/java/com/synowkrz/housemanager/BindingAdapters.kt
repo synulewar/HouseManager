@@ -13,11 +13,37 @@ import com.synowkrz.housemanager.babyTask.model.BabyProfile
 import com.synowkrz.housemanager.babyTask.model.BasicBabyEvent
 import com.synowkrz.housemanager.babyTask.model.FeedingType
 import com.synowkrz.housemanager.model.TaskGridItem
+import com.synowkrz.housemanager.shopList.adapters.AddItemListAdapter
+import com.synowkrz.housemanager.shopList.adapters.ShopListAdapter
+import com.synowkrz.housemanager.shopList.adapters.ShoppingListAdapter
+import com.synowkrz.housemanager.shopList.model.PersistentShopItem
+import com.synowkrz.housemanager.shopList.model.ShopItem
+import com.synowkrz.housemanager.shopList.model.ShopList
 import java.io.File
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<TaskGridItem>?) {
     val adapter = recyclerView.adapter as TaskGridAdpater
+    adapter.submitList(data)
+}
+
+
+@BindingAdapter("persistentListData")
+fun bindPersistentListRecyclerView(recyclerView: RecyclerView, data: List<PersistentShopItem>?) {
+    val adapter = recyclerView.adapter as AddItemListAdapter
+    adapter.submitList(data)
+}
+
+
+@BindingAdapter("shopListData")
+fun bindShopListRecyclerView(recyclerView: RecyclerView, data: List<ShopList>?) {
+    val adapter = recyclerView.adapter as ShopListAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("shoppingListData")
+fun bindShoppingItemList(recyclerView: RecyclerView, data: List<ShopItem>?) {
+    val adapter = recyclerView.adapter as ShoppingListAdapter
     adapter.submitList(data)
 }
 

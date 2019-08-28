@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/nav_graph_shoplist" app:startDestination="@id/shopListFragment">
+
+    <fragment android:id="@+id/shopListFragment"
+              android:name="com.synowkrz.housemanager.shopList.shopList.ShopListFragment"
+              android:label="ShopListFragment">
+        <action android:id="@+id/action_shopListFragment_to_shoppingFragment" app:destination="@id/shoppingFragment"/>
+    </fragment>
+    <fragment android:id="@+id/shoppingFragment"
+              android:name="com.synowkrz.housemanager.shopList.shoppingList.ShoppingFragment"
+              android:label="ShoppingFragment">
+        <argument android:name="listName" app:argType="string"/>
+        <action
+                android:id="@+id/action_shoppingFragment_to_addItemsFragment"
+                app:destination="@id/addItemsFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/addItemsFragment"
+            android:name="com.synowkrz.housemanager.shopList.addItem.AddItemsFragment"
+            android:label="AddItemsFragment" >
+        <argument
+                android:name="listName"
+                app:argType="string" />
+    </fragment>
+</navigation>
