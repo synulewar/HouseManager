@@ -1,7 +1,11 @@
 package com.synowkrz.housemanager
 
+import android.graphics.Color
 import com.synowkrz.housemanager.model.TaskTypes
+import com.synowkrz.housemanager.shopList.model.Category
 import com.synowkrz.housemanager.shopList.model.Measurements
+
+val TAG = "KRZYSIO"
 
 fun convertTypeTaskToResourceString(taskTypes: TaskTypes) : String {
     return when(taskTypes) {
@@ -26,6 +30,21 @@ fun getMeasurmentString(measurements: Measurements) : String {
         Measurements.WEIGHT -> "kg"
         Measurements.VOLUME -> "l"
         Measurements.QUANTITY -> ""
+    }
+}
+
+fun getColorByCategory(category: Category) : Int {
+    return when (category) {
+        Category.BREAD -> Color.YELLOW
+        Category.FRUIT_VEGETABLES -> Color.GREEN
+        Category.MEAT -> Color.RED
+        Category.DAIRY -> Color.WHITE
+        Category.ALCOHOL -> Color.GRAY
+        Category.SWEETS -> Color.CYAN
+        Category.SNACKS -> Color.CYAN
+        Category.HYGIENE -> Color.MAGENTA
+        Category.DRINKABLES -> Color.LTGRAY
+        Category.OTHER -> Color.DKGRAY
     }
 }
 

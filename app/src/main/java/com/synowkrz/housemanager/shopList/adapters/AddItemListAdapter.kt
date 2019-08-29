@@ -2,18 +2,21 @@ package com.synowkrz.housemanager.shopList.adapters
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.synowkrz.housemanager.databinding.AddItemListItemBinding
 import com.synowkrz.housemanager.getAmountFormat
+import com.synowkrz.housemanager.getColorByCategory
 import com.synowkrz.housemanager.getMeasurmentString
 import com.synowkrz.housemanager.shopList.model.PersistentShopItem
 import java.util.*
 
-class AddItemListAdapter(val onClickListener: OnClickListener)
+class AddItemListAdapter(val onClickListener: OnClickListener, val addToListAvialable : Boolean = true)
     : ListAdapter<PersistentShopItem, AddItemListAdapter.AddItemViewHolder>(DiffCallback) {
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddItemViewHolder {
@@ -22,8 +25,17 @@ class AddItemListAdapter(val onClickListener: OnClickListener)
 
     override fun onBindViewHolder(holder: AddItemViewHolder, position: Int) {
         val item = getItem(position)
-        holder.binding.addProduct.setOnClickListener{
-            onClickListener.onClick(item, holder.binding)
+        holder.itemView.setBackgroundColor(getColorByCategory(item.category))
+
+        if (addToListAvialable) {
+            holder.binding.addProduct.setOnClickListener{
+                onClickListener.onClick(item, holder.binding)
+            }
+        } else {
+            holder.binding.addProduct.visibility = View.GONE
+            holder.itemView.setOnClickListener {
+                onClickListener.onClick(item, holder.binding)
+            }
         }
         holder.onBind(item)
     }

@@ -39,6 +39,7 @@ class ShopListActivity : AppCompatActivity() {
         binding.navView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                R.id.shop_lists -> navController.navigate(R.id.shopListFragment)
+                R.id.shop_items -> navController.navigate(R.id.itemList)
                 R.id.shop_close -> finish()
             }
             true
