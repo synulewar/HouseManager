@@ -6,7 +6,7 @@
 
     <data>
         <variable name="viewModel"
-                  type="com.synowkrz.housemanager.shopList.shoppingList.ShoppingViewModel"/>
+                type="com.synowkrz.housemanager.shopList.inactiveShoppingList.InactiveShoppingListViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,16 +14,9 @@
             android:layout_height="match_parent"
             tools:context="com.synowkrz.housemanager.shopList.ShopListActivity">
 
-        <Button android:id="@+id/new_products"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                android:textSize="@dimen/standard_text_size"
-                android:text="@string/add_product"
-                android:onClick="@{() -> viewModel.onAddProduct()}"/>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/main_shopping_list"
+                android:id="@+id/inactive_shopping_list"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:padding="@dimen/frame_padding"
@@ -32,7 +25,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/inactive_button"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/new_products"
+                app:layout_constraintTop_toTopOf="parent"
                 app:shoppingListData="@{viewModel.itemList}"
                 tools:itemCount="8"
                 tools:listitem="@layout/main_shopping_list_item">
@@ -46,7 +39,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:textSize="@dimen/standard_text_size"
-                android:text="@string/bought_products"
-                android:onClick="@{() -> viewModel.onInactive()}"/>
+                android:text="@string/active_products"
+                android:onClick="@{() -> viewModel.goToActiveItems()}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

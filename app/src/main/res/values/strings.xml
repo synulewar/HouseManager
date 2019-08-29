@@ -78,6 +78,7 @@
     <string name="shop_paths">Shops</string>
     <string name="add_product">Add product</string>
     <string name="bought_products">Show bought products </string>
+    <string name="active_products">Show shop list </string>
     <string name="close">close</string>
     <string name="add_new_product">Add new product</string>
     <string name="new_product_name">Product name</string>

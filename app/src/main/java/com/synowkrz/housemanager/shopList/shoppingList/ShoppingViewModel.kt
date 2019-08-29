@@ -21,12 +21,25 @@ class ShoppingViewModel(val app: Application, val listName: String) : AndroidVie
     val onAddProductPressed : LiveData<Boolean>
         get() = _onAddProductPressed
 
+
+    private var _onGoToInactive = MutableLiveData<Boolean>()
+    val onGoToInactive : LiveData<Boolean>
+        get() = _onGoToInactive
+
     val itemList : LiveData<List<ShopItem>>
         get() = _itemList
 
 
     fun onAddProduct() {
         _onAddProductPressed.value = true
+    }
+
+    fun onInactive() {
+        _onGoToInactive.value = true
+    }
+
+    fun onGotoInactiveFinished() {
+        _onGoToInactive.value = false
     }
 
     fun onAddProductFinished() {

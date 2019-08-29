@@ -15,11 +15,25 @@
         <action
                 android:id="@+id/action_shoppingFragment_to_addItemsFragment"
                 app:destination="@id/addItemsFragment" />
+        <action
+                android:id="@+id/action_shoppingFragment_to_inactiveShoppingList"
+                app:destination="@id/inactiveShoppingList" />
     </fragment>
     <fragment
             android:id="@+id/addItemsFragment"
             android:name="com.synowkrz.housemanager.shopList.addItem.AddItemsFragment"
             android:label="AddItemsFragment" >
+        <argument
+                android:name="listName"
+                app:argType="string" />
+    </fragment>
+    <fragment
+            android:id="@+id/inactiveShoppingList"
+            android:name="com.synowkrz.housemanager.shopList.inactiveShoppingList.InactiveShoppingList"
+            android:label="InactiveShoppingList" >
+        <action
+                android:id="@+id/action_inactiveShoppingList_to_shoppingFragment"
+                app:destination="@id/shoppingFragment" />
         <argument
                 android:name="listName"
                 app:argType="string" />

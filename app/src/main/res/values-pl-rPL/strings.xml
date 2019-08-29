@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kierownik Domu</string>
+    <string name="hello_blank_fragment">Witam pusty fragment</string>
+    <string name="task_name_hint">Podaj nazwę swojego zadania</string>
+    <string name="baby_name_hint">Imię dziecka</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Anuluj</string>
+    <string name="error_string">Nazwa nie może być pusta</string>
+    <string name="error_database">Nazwa zadania musi być unikalna</string>
+    <string name="title_activity_baby">BabyActivity</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="choose_photo">Wybierz zdjęcie dziecka</string>
+    <string name="choose_birth_date">Wybierz datę urodzenia</string>
+    <string name="read_permission_denied">Zdjęcie nie może zostać pobrane bez pozwolenia</string>
+    <string name="empty_baby_name">Imię dziecka nie może być puste</string>
+    <string name="not_unique_baby_name">Imię dziecka musi być unikalne</string>
+    <string name="birthday_not_set_warning">Proszę ustawić datę urodzin</string>
+    <string name="profile">Profil</string>
+    <string name="actions">działania</string>
+    <string name="charts">Wykresy</string>
+    <string name="start">początek</string>
+    <string name="stop">zatrzymać</string>
+    <string name="pause">pauza</string>
+    <string name="eat">jedzenie</string>
+    <string name="wait">czeka</string>
+    <string name="title_activity_shop_list">ShopListActivity</string>
+    <string name="title_home">Dom</string>
+    <string name="title_dashboard">Deska rozdzielcza</string>
+    <string name="title_notifications">Powiadomienia</string>
+    <string name="new_shop_list">Wpisz nową nazwę listy</string>
+    <string name="new_list_title">Dodaj nową listę</string>
+    <string name="bread">chleb</string>
+    <string name="bun">kok</string>
+    <string name="muffin">bułeczka</string>
+    <string name="baguette">bagietka</string>
+    <string name="tomato">pomidor</string>
+    <string name="potato">ziemniaki</string>
+    <string name="cucumber">ogórek</string>
+    <string name="onion">cebula</string>
+    <string name="garlic">czosnek</string>
+    <string name="pepper">pieprz</string>
+    <string name="apple">jabłko</string>
+    <string name="banana">banan</string>
+    <string name="strawberries">truskawki</string>
+    <string name="ham">szynka</string>
+    <string name="chicken_fillets">filety z kurczaka</string>
+    <string name="minced_meat">mięso mielone</string>
+    <string name="pork_neck">karkówka</string>
+    <string name="sausage">kiełbasa</string>
+    <string name="frankfurter">parówka</string>
+    <string name="egg">jajko</string>
+    <string name="milk">mleko</string>
+    <string name="cheese">ser</string>
+    <string name="white_cheese">Biały ser</string>
+    <string name="beer">piwo</string>
+    <string name="vodka">wódka</string>
+    <string name="whisky">Whisky</string>
+    <string name="beer_free">piwo bezalkoholowe</string>
+    <string name="cookies">ciasteczka</string>
+    <string name="sweets">słodycze</string>
+    <string name="chocolate">czekolada</string>
+    <string name="jelly">galaretka</string>
+    <string name="chips">frytki</string>
+    <string name="bread_sticks">paluszki chlebowe</string>
+    <string name="peanuts">orzeszki ziemne</string>
+    <string name="crackers">krakersy</string>
+    <string name="tissue">papierowa chusteczka</string>
+    <string name="wipes">ściereczki</string>
+    <string name="diaper">pielucha</string>
+    <string name="toilet_paper">papier toaletowy</string>
+    <string name="soap">mydło</string>
+    <string name="shower_gel">żel pod prysznic</string>
+    <string name="tooth_paste">pasta do zębów</string>
+    <string name="shop_list">Listy</string>
+    <string name="shop_items">Produkty</string>
+    <string name="shop_paths">Sklepy</string>
+    <string name="add_product">Dodaj produkt</string>
+    <string name="bought_products">Pokaż kupione produkty</string>
+    <string name="active_products">Pokaż listę sklepów</string>
+    <string name="close">blisko</string>
+    <string name="add_new_product">Dodaj nowy produkt</string>
+    <string name="new_product_name">Nazwa produktu</string>
+    <string name="water">woda</string>
+    <string name="bread_category">Chleb</string>
+    <string name="fruit_vegetables_category">Owoce i warzywa</string>
+    <string name="meat_category">Mięso</string>
+    <string name="dairy_category">Mleczarnia</string>
+    <string name="alcohol_category">Alkohol</string>
+    <string name="sweets_category">Słodycze</string>
+    <string name="snacks_category">Przekąski</string>
+    <string name="hygiene_category">Higiena</string>
+    <string name="drinkables_category">Napoje</string>
+    <string name="default_amount">Domyślna ilość</string>
+
+
+    <string name="weight">Waga</string>
+    <string name="volume">Objętość</string>
+    <string name="quantity">Ilość</string>
+
+
+
+    <string-array name="category_list">
+        <item>@string/bread_category</item>
+        <item>@string/fruit_vegetables_category</item>
+        <item>@string/meat_category</item>
+        <item>@string/dairy_category</item>
+        <item>@string/alcohol_category</item>
+        <item>@string/sweets_category</item>
+        <item>@string/snacks_category</item>
+        <item>@string/hygiene_category</item>
+        <item>@string/drinkables_category</item>
+    </string-array>
+
+    <string-array name="measurment_list">
+        <item>@string/weight</item>
+        <item>@string/volume</item>
+        <item>@string/quantity</item>
+    </string-array>
+
+
+</resources>

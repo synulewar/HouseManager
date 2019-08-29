@@ -41,6 +41,13 @@ class ShoppingFragment : Fragment() {
             }
         })
 
+        viewModel.onGoToInactive.observe(this, Observer {
+            if(it) {
+                viewModel.onGotoInactiveFinished()
+                findNavController().navigate(ShoppingFragmentDirections.actionShoppingFragmentToInactiveShoppingList(listName))
+            }
+        })
+
         return binding.root
     }
 }
