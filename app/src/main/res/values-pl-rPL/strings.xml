@@ -92,6 +92,11 @@
     <string name="hygiene_category">Higiena</string>
     <string name="drinkables_category">Napoje</string>
     <string name="default_amount">Domyślna ilość</string>
+    <string name="other_category">Inne</string>
+    <string name="add_new_area">Dodaj nowy obszar sklepowy</string>
+    <string name="add_new_area_hint">Nazwa obszaru</string>
+    <string name="areas">Obszary</string>
+    <string name="shop_pat">Sciezka sklepowa</string>
 
 
     <string name="weight">Waga</string>
@@ -110,6 +115,7 @@
         <item>@string/snacks_category</item>
         <item>@string/hygiene_category</item>
         <item>@string/drinkables_category</item>
+        <item>@string/other_category</item>
     </string-array>
 
     <string-array name="measurment_list">

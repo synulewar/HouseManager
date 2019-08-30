@@ -13,12 +13,8 @@ import com.synowkrz.housemanager.babyTask.model.BabyProfile
 import com.synowkrz.housemanager.babyTask.model.BasicBabyEvent
 import com.synowkrz.housemanager.babyTask.model.FeedingType
 import com.synowkrz.housemanager.model.TaskGridItem
-import com.synowkrz.housemanager.shopList.adapters.AddItemListAdapter
-import com.synowkrz.housemanager.shopList.adapters.ShopListAdapter
-import com.synowkrz.housemanager.shopList.adapters.ShoppingListAdapter
-import com.synowkrz.housemanager.shopList.model.PersistentShopItem
-import com.synowkrz.housemanager.shopList.model.ShopItem
-import com.synowkrz.housemanager.shopList.model.ShopList
+import com.synowkrz.housemanager.shopList.adapters.*
+import com.synowkrz.housemanager.shopList.model.*
 import java.io.File
 
 @BindingAdapter("listData")
@@ -63,6 +59,18 @@ fun bindRecyclerViewBabyAction(recyclerView: RecyclerView, data: List<BasicBabyE
 @BindingAdapter("babyEventListData")
 fun bindRecyclerViewBabyEvent(recyclerView: RecyclerView, data: List<BabyEvent>?) {
     val adapter = recyclerView.adapter as BabyEventListAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("shopAreaData")
+fun bindShopAreaData(recyclerView: RecyclerView, data: List<ShopArea>?) {
+    val adapter = recyclerView.adapter as ShopAreaListAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("categoryData")
+fun bindCategoryData(recyclerView: RecyclerView, data: List<Category>?) {
+    val adapter = recyclerView.adapter as AreaConfigurationAdapter
     adapter.submitList(data)
 }
 

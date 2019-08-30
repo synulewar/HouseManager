@@ -10,7 +10,7 @@ import com.synowkrz.housemanager.model.TaskGridItem
 import com.synowkrz.housemanager.model.TaskTypes
 import com.synowkrz.housemanager.shopList.model.*
 
-@Database(entities = [TaskGridItem::class, BabyProfile::class, Feeding::class, ShopList::class, PersistentShopItem::class, ShopItem::class],
+@Database(entities = [TaskGridItem::class, BabyProfile::class, Feeding::class, ShopList::class, PersistentShopItem::class, ShopItem::class, ShopArea::class],
     version = 1, exportSchema = false)
 @TypeConverters(CustomConverters::class)
 abstract class HouseManagerDatabase: RoomDatabase() {
@@ -21,6 +21,7 @@ abstract class HouseManagerDatabase: RoomDatabase() {
     abstract val shopListDao: ShopListDao
     abstract val persistentShopItemDao : PersistentShopItemDao
     abstract val shopItemDao : ShopItemDao
+    abstract val shopAreaDao : ShopAreaDao
 
     companion object {
         @Volatile

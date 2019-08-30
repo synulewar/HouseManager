@@ -10,6 +10,9 @@
         <action
                 android:id="@+id/action_shopListFragment_to_itemList"
                 app:destination="@id/itemList" />
+        <action
+                android:id="@+id/action_shopListFragment_to_shopAreaList"
+                app:destination="@id/shopAreaList" />
     </fragment>
     <fragment android:id="@+id/shoppingFragment"
               android:name="com.synowkrz.housemanager.shopList.shoppingList.ShoppingFragment"
@@ -45,4 +48,20 @@
             android:id="@+id/itemList"
             android:name="com.synowkrz.housemanager.shopList.itemList.ItemList"
             android:label="ItemList" />
+    <fragment
+            android:id="@+id/shopAreaList"
+            android:name="com.synowkrz.housemanager.shopList.shopArea.ShopAreaList"
+            android:label="ShopAreaList" >
+        <action
+                android:id="@+id/action_shopAreaList_to_shopAreaConfigurator"
+                app:destination="@id/shopAreaConfigurator" />
+    </fragment>
+    <fragment
+            android:id="@+id/shopAreaConfigurator"
+            android:name="com.synowkrz.housemanager.shopList.shopAreaConfigurator.ShopAreaConfigurator"
+            android:label="ShopAreaConfigurator" >
+        <argument
+                android:name="shopAreaName"
+                app:argType="string" />
+    </fragment>
 </navigation>

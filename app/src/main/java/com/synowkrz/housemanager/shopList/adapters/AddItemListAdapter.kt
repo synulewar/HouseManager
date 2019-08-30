@@ -17,8 +17,6 @@ import java.util.*
 class AddItemListAdapter(val onClickListener: OnClickListener, val addToListAvialable : Boolean = true)
     : ListAdapter<PersistentShopItem, AddItemListAdapter.AddItemViewHolder>(DiffCallback) {
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddItemViewHolder {
         return AddItemViewHolder(AddItemListItemBinding.inflate(LayoutInflater.from(parent.context)))
     }

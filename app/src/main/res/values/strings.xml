@@ -92,14 +92,16 @@
     <string name="snacks_category">Snacks</string>
     <string name="hygiene_category">Hygiene</string>
     <string name="drinkables_category">Drinkables</string>
+    <string name="other_category">Other</string>
     <string name="default_amount">Default amount</string>
-
+    <string name="add_new_area">Add new shop area</string>
+    <string name="add_new_area_hint">Area name</string>
+    <string name="areas">Areas</string>
+    <string name="shop_pat">Shop path</string>
 
     <string name="weight">Weight</string>
     <string name="volume">Volume</string>
     <string name="quantity">Quantity</string>
-
-
 
     <string-array name="category_list">
         <item>@string/bread_category</item>
@@ -111,6 +113,7 @@
         <item>@string/snacks_category</item>
         <item>@string/hygiene_category</item>
         <item>@string/drinkables_category</item>
+        <item>@string/other_category</item>
     </string-array>
 
     <string-array name="measurment_list">

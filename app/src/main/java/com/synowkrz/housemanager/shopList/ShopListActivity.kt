@@ -40,6 +40,7 @@ class ShopListActivity : AppCompatActivity() {
             when (it.itemId) {
                R.id.shop_lists -> navController.navigate(R.id.shopListFragment)
                 R.id.shop_items -> navController.navigate(R.id.itemList)
+                R.id.shops_paths -> navController.navigate(R.id.shopAreaList)
                 R.id.shop_close -> finish()
             }
             true

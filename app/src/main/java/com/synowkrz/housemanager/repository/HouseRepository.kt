@@ -7,6 +7,7 @@ import com.synowkrz.housemanager.babyTask.model.Feeding
 import com.synowkrz.housemanager.database.HouseManagerDatabase
 import com.synowkrz.housemanager.model.TaskGridItem
 import com.synowkrz.housemanager.shopList.model.PersistentShopItem
+import com.synowkrz.housemanager.shopList.model.ShopArea
 import com.synowkrz.housemanager.shopList.model.ShopItem
 import com.synowkrz.housemanager.shopList.model.ShopList
 import kotlinx.coroutines.Dispatchers
@@ -129,6 +130,32 @@ class HouseRepository(private val app: Application) {
     suspend fun updateShopItem(shopItem: ShopItem) {
         withContext(Dispatchers.IO) {
             database.shopItemDao.update(shopItem)
+        }
+    }
+
+    fun getAllShopAreas() : LiveData<List<ShopArea>> {
+        return database.shopAreaDao.getAllShopAreas()
+    }
+
+    fun getShopAreaByName(name: String) : ShopArea {
+        return database.shopAreaDao.getShopAreByName(name)
+    }
+
+    suspend fun insertNewShopArea(shopArea: ShopArea) {
+        withContext(Dispatchers.IO) {
+            database.shopAreaDao.insert(shopArea)
+        }
+    }
+
+    suspend fun updateShopArea(shopArea: ShopArea) {
+        withContext(Dispatchers.IO) {
+            database.shopAreaDao.update(shopArea)
+        }
+    }
+
+    suspend fun deletetShopArea(name: String) {
+        withContext(Dispatchers.IO) {
+            database.shopAreaDao.deleteArea(name)
         }
     }
 }
