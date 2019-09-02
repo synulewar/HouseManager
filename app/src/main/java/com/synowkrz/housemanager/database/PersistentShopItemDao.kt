@@ -18,9 +18,15 @@ interface PersistentShopItemDao {
     @Query("SELECT * FROM persistent_shop_item ORDER BY usage DESC")
     fun getAllPersistenShopItem() : LiveData<List<PersistentShopItem>>
 
+    @Query("SELECT * FROM persistent_shop_item ORDER BY usage DESC")
+    fun getAllPersistenShopItemAsync() : List<PersistentShopItem>
+
     @Query("SELECT * FROM persistent_shop_item WHERE name = :name")
     fun getPersistentShopItemByName(name: String) : PersistentShopItem?
 
-    @Query("SELECT * FROM persistent_shop_item WHERE category = :category")
+    @Query("SELECT * FROM persistent_shop_item WHERE category = :category ORDER BY usage DESC")
     fun getPersistentShopItemByCategory(category: String) : LiveData<List<PersistentShopItem>>
+
+    @Query("SELECT * FROM persistent_shop_item WHERE category = :category ORDER BY usage DESC")
+    fun getPersistentShopItemByCategoryAsync(category: String) : List<PersistentShopItem>
 }

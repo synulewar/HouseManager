@@ -54,6 +54,8 @@ class AreaConfigurationAdapter(val app : Application, val onClickListener: OnCon
                 Category.HYGIENE -> app.getString(R.string.hygiene_category)
                 Category.DRINKABLES -> app.getString(R.string.drinkables_category)
                 Category.OTHER -> app.getString(R.string.other_category)
+                Category.ALL -> app.getString(R.string.all_categories)
+                Category.CAN_AND_PRESERVES -> app.getString(R.string.can_preserves_category)
             }
         }
     }

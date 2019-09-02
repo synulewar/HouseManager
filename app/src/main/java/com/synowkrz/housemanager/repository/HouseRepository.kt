@@ -21,6 +21,7 @@ class HouseRepository(private val app: Application) {
     val babies by lazy { database.babyProfileDao.getAllBabies()}
     val shopList by lazy {database.shopListDao.getAllShopList()}
     val persistentItems by lazy {database.persistentShopItemDao.getAllPersistenShopItem()}
+    val shopAreas by lazy { database.shopAreaDao.getAllShopAreas() }
 
     suspend fun insertBabyProfile(babyProfile: BabyProfile) {
         withContext(Dispatchers.IO) {
@@ -141,6 +142,14 @@ class HouseRepository(private val app: Application) {
         return database.shopAreaDao.getShopAreByName(name)
     }
 
+    fun getAllPersistentItemAsync() : List<PersistentShopItem> {
+        return database.persistentShopItemDao.getAllPersistenShopItemAsync()
+    }
+
+    fun getAllPersistentItemByCategoryAsync(category : String) : List<PersistentShopItem> {
+        return database.persistentShopItemDao.getPersistentShopItemByCategoryAsync(category)
+    }
+
     suspend fun insertNewShopArea(shopArea: ShopArea) {
         withContext(Dispatchers.IO) {
             database.shopAreaDao.insert(shopArea)
@@ -158,4 +167,17 @@ class HouseRepository(private val app: Application) {
             database.shopAreaDao.deleteArea(name)
         }
     }
+
+    fun getAllShopAreaAsync() : List<ShopArea> {
+        return database.shopAreaDao.getAllShopAreasAsync()
+    }
+
+
+    fun getAllPersistentShopItemsByCategory(category: String) : LiveData<List<PersistentShopItem>> {
+        return database.persistentShopItemDao.getPersistentShopItemByCategory(category)
+    }
+
+
+
+
 }

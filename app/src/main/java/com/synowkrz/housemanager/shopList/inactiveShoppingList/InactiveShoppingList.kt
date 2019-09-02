@@ -20,12 +20,14 @@ class InactiveShoppingList : Fragment() {
     private lateinit var viewModel: InactiveShoppingListViewModel
     private lateinit var binding: InactiveShoppingListFragmentBinding
     private lateinit var listName : String
+    private lateinit var sortString : String
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         listName = ShoppingFragmentArgs.fromBundle(arguments!!).listName
+        sortString = ShoppingFragmentArgs.fromBundle(arguments!!).sortString
         viewModel = ViewModelProviders.of(this, InactiveShoppingListViewModel.Factory(activity!!.application, listName)).get(
             InactiveShoppingListViewModel::class.java)
         binding = InactiveShoppingListFragmentBinding.inflate(inflater)
@@ -41,7 +43,7 @@ class InactiveShoppingList : Fragment() {
         viewModel.activItem.observe(this, Observer {
             if(it) {
                 viewModel.onactiveItemFinished()
-                findNavController().navigate(InactiveShoppingListDirections.actionInactiveShoppingListToShoppingFragment(listName))
+                findNavController().navigate(InactiveShoppingListDirections.actionInactiveShoppingListToShoppingFragment(listName, sortString))
             }
 
         })

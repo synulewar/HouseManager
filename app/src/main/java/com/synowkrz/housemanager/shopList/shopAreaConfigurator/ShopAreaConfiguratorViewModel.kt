@@ -3,6 +3,7 @@ package com.synowkrz.housemanager.shopList.shopAreaConfigurator
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import com.synowkrz.housemanager.DELIMITER
 import com.synowkrz.housemanager.TAG
 import com.synowkrz.housemanager.repository.HouseRepository
 import com.synowkrz.housemanager.shopList.model.Category
@@ -10,10 +11,6 @@ import com.synowkrz.housemanager.shopList.model.ShopArea
 import kotlinx.coroutines.*
 
 class ShopAreaConfiguratorViewModel(val app: Application, val shopAreaName: String) : AndroidViewModel(app) {
-
-    companion object {
-        val DELIMITER = ","
-    }
 
     private val repository = HouseRepository(app)
     private val viewModelJob = Job()
@@ -43,6 +40,7 @@ class ShopAreaConfiguratorViewModel(val app: Application, val shopAreaName: Stri
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 areaNotAssign.addAll(Category.values())
+                areaNotAssign.remove(Category.ALL)
                 currentShopArea = repository.getShopAreaByName(shopAreaName)
                 Log.d(TAG, "Saved areas ${currentShopArea.areas}")
                 for (cat in currentShopArea.areas.split(DELIMITER)) {

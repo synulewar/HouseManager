@@ -7,6 +7,7 @@ import com.synowkrz.housemanager.repository.HouseRepository
 import com.synowkrz.housemanager.shopList.model.Category
 import com.synowkrz.housemanager.shopList.model.Measurements
 import com.synowkrz.housemanager.shopList.model.PersistentShopItem
+import com.synowkrz.housemanager.shopList.model.ShopArea
 
 suspend fun initializeShopitems(repository: HouseRepository, app: Application) {
 
@@ -83,7 +84,12 @@ suspend fun initializeShopitems(repository: HouseRepository, app: Application) {
         ham, chickenFillets, mincedMeat, porkNeck, sausage, frankfurter, egg, milk, cheese, whiteCheese, beer, vodka, whisky, beerFree,
         cookies, sweets, chocolate, jelly, chips, breadSticks, peanuts, crackers, tissue, wipes, diaper, toilet_paper, soap, showerGel, toothPaste, water)
 
+    var defaultShopArea = ShopArea("default", "")
+    repository.insertNewShopArea(defaultShopArea)
+
     for (item in producList) {
         repository.insertNewPersistentShopItem(item)
     }
+
+
 }

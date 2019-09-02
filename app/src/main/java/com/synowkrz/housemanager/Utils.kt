@@ -6,6 +6,7 @@ import com.synowkrz.housemanager.shopList.model.Category
 import com.synowkrz.housemanager.shopList.model.Measurements
 
 val TAG = "KRZYSIO"
+val DELIMITER = ","
 
 fun convertTypeTaskToResourceString(taskTypes: TaskTypes) : String {
     return when(taskTypes) {
@@ -41,10 +42,11 @@ fun getColorByCategory(category: Category) : Int {
         Category.DAIRY -> Color.WHITE
         Category.ALCOHOL -> Color.GRAY
         Category.SWEETS -> Color.CYAN
-        Category.SNACKS -> Color.CYAN
+        Category.SNACKS -> Color.DKGRAY
         Category.HYGIENE -> Color.MAGENTA
         Category.DRINKABLES -> Color.LTGRAY
-        Category.OTHER -> Color.DKGRAY
+        Category.OTHER -> Color.BLUE
+        else -> Color.WHITE
     }
 }
 

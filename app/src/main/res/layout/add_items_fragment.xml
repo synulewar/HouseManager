@@ -14,6 +14,17 @@
             android:layout_height="match_parent"
             tools:context="com.synowkrz.housemanager.shopList.ShopListActivity">
 
+
+        <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/category_spinner_search"
+                android:entries="@array/category_list_with_all"
+                android:layout_margin="@dimen/small_margin"/>
+
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/item_list"
                 android:layout_width="0dp"
@@ -24,8 +35,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:persistentListData="@{viewModel.itemList}"
+                app:layout_constraintTop_toBottomOf="@id/category_spinner_search"
                 tools:itemCount="8"
                 tools:listitem="@layout/add_item_list_item">
         </androidx.recyclerview.widget.RecyclerView>
@@ -42,3 +52,5 @@
                 />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
+
+        <!--app:persistentListData="@{viewModel.itemList}"-->

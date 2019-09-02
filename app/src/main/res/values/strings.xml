@@ -93,6 +93,7 @@
     <string name="hygiene_category">Hygiene</string>
     <string name="drinkables_category">Drinkables</string>
     <string name="other_category">Other</string>
+    <string name="can_preserves_category">Can and preserves</string>
     <string name="default_amount">Default amount</string>
     <string name="add_new_area">Add new shop area</string>
     <string name="add_new_area_hint">Area name</string>
@@ -102,8 +103,25 @@
     <string name="weight">Weight</string>
     <string name="volume">Volume</string>
     <string name="quantity">Quantity</string>
+    <string name="shop_area">Shop area</string>
+    <string name="all_categories">All</string>
 
     <string-array name="category_list">
+        <item>@string/bread_category</item>
+        <item>@string/fruit_vegetables_category</item>
+        <item>@string/meat_category</item>
+        <item>@string/dairy_category</item>
+        <item>@string/alcohol_category</item>
+        <item>@string/sweets_category</item>
+        <item>@string/snacks_category</item>
+        <item>@string/hygiene_category</item>
+        <item>@string/drinkables_category</item>
+        <item>@string/can_preserves_category</item>
+        <item>@string/other_category</item>
+    </string-array>
+
+    <string-array name="category_list_with_all">
+        <item>@string/all_categories</item>
         <item>@string/bread_category</item>
         <item>@string/fruit_vegetables_category</item>
         <item>@string/meat_category</item>

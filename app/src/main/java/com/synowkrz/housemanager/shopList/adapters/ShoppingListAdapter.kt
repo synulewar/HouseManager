@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.synowkrz.housemanager.databinding.MainShoppingListItemBinding
 import com.synowkrz.housemanager.getAmountFormat
+import com.synowkrz.housemanager.getColorByCategory
 import com.synowkrz.housemanager.getMeasurmentString
 import com.synowkrz.housemanager.shopList.model.ShopItem
 import java.util.*
@@ -22,6 +23,8 @@ class ShoppingListAdapter(val onShopItemClickListener: OnShopItemClickListener,
 
     override fun onBindViewHolder(holder: ShoppingListAdapter.ShopItemViewHolder, position: Int) {
         val item = getItem(position)
+
+        holder.itemView.setBackgroundColor(getColorByCategory(item.category))
 
         holder.itemView.setOnClickListener {
             onShopItemClickListener.onClick(item, it)

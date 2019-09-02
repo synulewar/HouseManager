@@ -75,6 +75,7 @@ class ItemList : Fragment() {
                 getString(R.string.snacks_category) -> Category.SNACKS
                 getString(R.string.hygiene_category) -> Category.HYGIENE
                 getString(R.string.drinkables_category) -> Category.DRINKABLES
+                getString(R.string.can_preserves_category) -> Category.CAN_AND_PRESERVES
                 else -> Category.OTHER
             }
 

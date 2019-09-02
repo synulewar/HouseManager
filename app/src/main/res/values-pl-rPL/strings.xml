@@ -39,7 +39,7 @@
     <string name="cucumber">ogórek</string>
     <string name="onion">cebula</string>
     <string name="garlic">czosnek</string>
-    <string name="pepper">pieprz</string>
+    <string name="pepper">papryka</string>
     <string name="apple">jabłko</string>
     <string name="banana">banan</string>
     <string name="strawberries">truskawki</string>
@@ -85,7 +85,7 @@
     <string name="bread_category">Chleb</string>
     <string name="fruit_vegetables_category">Owoce i warzywa</string>
     <string name="meat_category">Mięso</string>
-    <string name="dairy_category">Mleczarnia</string>
+    <string name="dairy_category">Nabiał</string>
     <string name="alcohol_category">Alkohol</string>
     <string name="sweets_category">Słodycze</string>
     <string name="snacks_category">Przekąski</string>
@@ -97,6 +97,9 @@
     <string name="add_new_area_hint">Nazwa obszaru</string>
     <string name="areas">Obszary</string>
     <string name="shop_pat">Sciezka sklepowa</string>
+    <string name="shop_area">Mapa sklepu</string>
+    <string name="all_categories">Wszytskie</string>
+    <string name="can_preserves_category">Konserwy i przetwory</string>
 
 
     <string name="weight">Waga</string>
@@ -106,6 +109,22 @@
 
 
     <string-array name="category_list">
+        <item>@string/bread_category</item>
+        <item>@string/fruit_vegetables_category</item>
+        <item>@string/meat_category</item>
+        <item>@string/dairy_category</item>
+        <item>@string/alcohol_category</item>
+        <item>@string/sweets_category</item>
+        <item>@string/snacks_category</item>
+        <item>@string/hygiene_category</item>
+        <item>@string/drinkables_category</item>
+        <item>@string/can_preserves_category</item>
+        <item>@string/other_category</item>
+    </string-array>
+
+
+    <string-array name="category_list_with_all">
+        <item>@string/all_categories</item>
         <item>@string/bread_category</item>
         <item>@string/fruit_vegetables_category</item>
         <item>@string/meat_category</item>

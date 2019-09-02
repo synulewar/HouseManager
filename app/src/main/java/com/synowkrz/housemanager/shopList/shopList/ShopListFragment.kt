@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -21,6 +23,7 @@ class ShopListFragment : Fragment() {
     private lateinit var viewModel: ShopListViewModel
     private lateinit var binding: ShopListFragmentBinding
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -34,7 +37,7 @@ class ShopListFragment : Fragment() {
             }
         })
         binding.mainShopList.adapter = ShopListAdapter(ShopListAdapter.OnShopListClickListener{
-            findNavController().navigate(ShopListFragmentDirections.actionShopListFragmentToShoppingFragment(it.name))
+            findNavController().navigate(ShopListFragmentDirections.actionShopListFragmentToShoppingFragment(it.name, viewModel.getSortString(it.shopName)))
         }, ShopListAdapter.OnShopListLongClickListener{
             true
         })
@@ -42,18 +45,30 @@ class ShopListFragment : Fragment() {
         return binding.root
     }
 
-
     fun showNewListDialog() {
         val builder = AlertDialog.Builder(context)
         builder.setTitle(getString(R.string.new_list_title))
         val view = layoutInflater.inflate(R.layout.dialog_new_list, null)
         val editText = view.findViewById(R.id.new_list_edit) as EditText
+        val spinner = view.findViewById(R.id.areas_spinner) as Spinner
+        viewModel.areaNames.observe( this, Observer {
+            if (it !=  null) {
+                val areasList = it
+                var spinnerArray = Array(it.size) {
+                    areasList[it]
+                }
+                val adapter = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, spinnerArray)
+                spinner.adapter = adapter
+            }
+        }
+        )
         builder.setView(view)
 
         builder.setPositiveButton(android.R.string.ok) { dialogInterface, i ->
             val newList = editText.text.toString()
-            Toast.makeText(context, "New list name ${newList}", Toast.LENGTH_SHORT).show()
-            viewModel.insertNewShopList(ShopList(newList))
+            val shopArea = spinner.selectedItem.toString()
+            Toast.makeText(context, "New list name ${newList} shop area ${shopArea}", Toast.LENGTH_SHORT).show()
+            viewModel.insertNewShopList(ShopList(newList, shopArea))
         }
 
         builder.setNegativeButton(android.R.string.cancel) { dialogInterface, i ->

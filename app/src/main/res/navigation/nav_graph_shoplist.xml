@@ -24,6 +24,9 @@
         <action
                 android:id="@+id/action_shoppingFragment_to_inactiveShoppingList"
                 app:destination="@id/inactiveShoppingList" />
+        <argument
+                android:name="sortString"
+                app:argType="string" />
     </fragment>
     <fragment
             android:id="@+id/addItemsFragment"
@@ -42,6 +45,9 @@
                 app:destination="@id/shoppingFragment" />
         <argument
                 android:name="listName"
+                app:argType="string" />
+        <argument
+                android:name="sortString"
                 app:argType="string" />
     </fragment>
     <fragment

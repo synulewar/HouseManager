@@ -11,7 +11,7 @@ import com.synowkrz.housemanager.model.TaskTypes
 import com.synowkrz.housemanager.shopList.model.*
 
 @Database(entities = [TaskGridItem::class, BabyProfile::class, Feeding::class, ShopList::class, PersistentShopItem::class, ShopItem::class, ShopArea::class],
-    version = 1, exportSchema = false)
+    version = 2, exportSchema = false)
 @TypeConverters(CustomConverters::class)
 abstract class HouseManagerDatabase: RoomDatabase() {
 

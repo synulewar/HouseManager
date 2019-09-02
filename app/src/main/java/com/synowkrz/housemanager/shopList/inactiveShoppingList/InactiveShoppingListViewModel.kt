@@ -15,7 +15,12 @@ class InactiveShoppingListViewModel(app: Application, val listName: String) : An
     private val repository = HouseRepository(app)
     private val viewModelJob = Job()
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-    private var _itemList = repository.getAllInactiveItems(listName)
+
+    val inactiveReverser : (List<ShopItem>) -> List<ShopItem> = {
+        it.reversed()
+    }
+    private val unsortedList = repository.getAllInactiveItems(listName)
+    private var _itemList = Transformations.map(unsortedList, inactiveReverser)
 
     val itemList : LiveData<List<ShopItem>>
         get() = _itemList
