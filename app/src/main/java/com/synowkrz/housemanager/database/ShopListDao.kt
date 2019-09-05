@@ -18,7 +18,13 @@ interface ShopListDao {
     @Query("SELECT * FROM shop_list")
     fun getAllShopList() : LiveData<List<ShopList>>
 
+    @Query("SELECT * FROM shop_list")
+    fun getAllShopListAsync() : List<ShopList>
+
     @Query("SELECT * FROM shop_list where name = :name")
     fun getShopList(name: String) : LiveData<ShopList>
+
+    @Query("DELETE FROM shop_list where name = :name")
+    fun deleteShopList(name :  String)
 
 }

@@ -34,7 +34,7 @@ class ItemList : Fragment() {
         Log.d(TAG, "Before adapter attach")
         binding.itemList.adapter = AddItemListAdapter(AddItemListAdapter.OnClickListener{ shopItem, binding ->
             Toast.makeText(context, "This will edit ${shopItem.name}", Toast.LENGTH_SHORT).show()
-        }, false)
+        }, activity!!.application, false)
 
         viewModel.onAddPersistentItem.observe(this, Observer {
             if (it) {

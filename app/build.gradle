@@ -8,6 +8,8 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: "androidx.navigation.safeargs"
 
+apply plugin: "com.google.gms.google-services"
+
 android {
     compileSdkVersion 29
     dataBinding {
@@ -83,4 +85,13 @@ dependencies {
     implementation "com.google.android.material:material:$version_material"
 
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
+
+    // add SDKs for desired Firebase products
+    // https://firebase.google.com/docs/android/setup#available-libraries
+
+    implementation "com.google.firebase:firebase-auth:19.0.0"
+    implementation 'com.google.firebase:firebase-firestore-ktx:21.0.0'
+
+    implementation 'com.google.firebase:firebase-core:17.2.0'
+    implementation 'com.google.firebase:firebase-database:19.0.0'
 }

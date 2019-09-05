@@ -1,6 +1,7 @@
 package com.synowkrz.housemanager.shopList.adapters
 
 
+import android.app.Application
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,8 @@ import com.synowkrz.housemanager.shopList.model.ShopItem
 import java.util.*
 
 class ShoppingListAdapter(val onShopItemClickListener: OnShopItemClickListener,
-                          val onShopItemLongClickListener: OnShopItemLongClickListener) : ListAdapter<ShopItem, ShoppingListAdapter.ShopItemViewHolder>(DiffCallback) {
+                          val onShopItemLongClickListener: OnShopItemLongClickListener,
+                          val app: Application) : ListAdapter<ShopItem, ShoppingListAdapter.ShopItemViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingListAdapter.ShopItemViewHolder {
         return ShopItemViewHolder(MainShoppingListItemBinding.inflate(LayoutInflater.from(parent.context)))
@@ -24,7 +26,7 @@ class ShoppingListAdapter(val onShopItemClickListener: OnShopItemClickListener,
     override fun onBindViewHolder(holder: ShoppingListAdapter.ShopItemViewHolder, position: Int) {
         val item = getItem(position)
 
-        holder.itemView.setBackgroundColor(getColorByCategory(item.category))
+        holder.itemView.setBackgroundColor(getColorByCategory(item.category, app))
 
         holder.itemView.setOnClickListener {
             onShopItemClickListener.onClick(item, it)

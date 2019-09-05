@@ -34,7 +34,7 @@ class AddItemsViewModel(val app: Application, val listName: String) : AndroidVie
         persistentShopItem.usage += 1
         viewModelScope.launch {
             var amountValue = amount.replace(",", ".").toDouble()
-            repository.insertShopItem(ShopItem(0,persistentShopItem.name, persistentShopItem.category, amountValue, persistentShopItem.measurements, listName))
+            repository.insertShopItem(ShopItem(persistentShopItem.name, persistentShopItem.category, amountValue, persistentShopItem.measurements, listName))
             repository.updatePersistentShopItem(persistentShopItem)
         }
     }

@@ -38,7 +38,7 @@ class InactiveShoppingList : Fragment() {
             }
         }, ShoppingListAdapter.OnShopItemLongClickListener {
                 shopItem, view -> true
-        })
+        }, activity!!.application)
 
         viewModel.activItem.observe(this, Observer {
             if(it) {

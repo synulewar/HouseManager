@@ -4,4 +4,16 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="black">#000000</color>
+    <color name="yellow">#F1D903</color>
+    <color name="green">#42F103</color>
+    <color name="white">#00000000</color>
+    <color name="grey">#46000000</color>
+    <color name="cyan">#0DECEC</color>
+    <color name="orange">#F88832</color>
+    <color name="pink">#EC85DB</color>
+    <color name="violet">#A84DEB</color>
+    <color name="red">#FA0202</color>
+    <color name="dark_grey">#757272</color>
+    <color name="blue">#0E9EE6</color>
+
 </resources>

@@ -27,7 +27,7 @@ class ShopAreaList : Fragment() {
            Toast.makeText(context, "${it.name} clicked", Toast.LENGTH_SHORT).show()
             findNavController().navigate(ShopAreaListDirections.actionShopAreaListToShopAreaConfigurator(it.name))
         }, ShopAreaListAdapter.OnShopAreaLongClickListener{
-            viewModel.deleteShopArea(it.name)
+            viewModel.deleteShopArea(it)
             true
         })
 

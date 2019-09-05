@@ -36,7 +36,6 @@ class ShopListViewModel(val app: Application) : AndroidViewModel(app) {
     val itemList : LiveData<List<ShopList>>
 
     init {
-        initializeShopItems()
         itemList = repository.shopList
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
@@ -74,9 +73,12 @@ class ShopListViewModel(val app: Application) : AndroidViewModel(app) {
         return ""
     }
 
-    private fun initializeShopItems() {
-
+    fun removeShopList(shopList: ShopList) {
+        viewModelScope.launch {
+            repository.removeShopList(shopList)
+        }
     }
+
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

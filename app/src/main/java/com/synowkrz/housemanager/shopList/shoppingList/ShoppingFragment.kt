@@ -34,7 +34,7 @@ class ShoppingFragment : Fragment() {
             }
         }, ShoppingListAdapter.OnShopItemLongClickListener {
             shopItem, view -> true
-        })
+        }, activity!!.application)
 
         viewModel.onAddProductPressed.observe(this, Observer {
             if (it) {

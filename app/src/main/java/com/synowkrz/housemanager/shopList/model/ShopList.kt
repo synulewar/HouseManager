@@ -5,5 +5,5 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "shop_list")
 class ShopList(@PrimaryKey
-               val name: String,
-               val shopName: String = "")
+               var name: String = "",
+               var shopName: String = "")

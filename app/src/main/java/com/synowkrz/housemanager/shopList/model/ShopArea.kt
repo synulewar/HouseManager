@@ -4,5 +4,5 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "shop_area")
-class ShopArea(@PrimaryKey val name: String, var areas : String) {
+class ShopArea(@PrimaryKey var name: String ="", var areas : String = "") {
 }

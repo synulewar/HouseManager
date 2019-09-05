@@ -18,6 +18,9 @@ interface ShopItemDao {
     @Query("SELECT * FROM shop_item where listName = :listName and active = 0")
     fun getAllInactivetemsFromList(listName : String) : LiveData<List<ShopItem>>
 
+    @Query("SELECT * FROM shop_item")
+    fun getAllItemsAsync() : List<ShopItem>
+
     @Delete
     fun deleteShopItem(shopItem: ShopItem)
 }

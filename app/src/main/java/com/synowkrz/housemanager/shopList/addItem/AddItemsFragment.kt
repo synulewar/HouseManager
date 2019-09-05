@@ -36,7 +36,7 @@ class AddItemsFragment : Fragment() {
         adapter = AddItemListAdapter(AddItemListAdapter.OnClickListener {shopItem, binding ->
             Toast.makeText(context, "Add ${shopItem.name} ${binding.amount.text}", Toast.LENGTH_SHORT).show()
             viewModel.onProductAdd(shopItem, binding.amount.text.toString())
-        })
+        }, activity!!.application)
         binding.itemList.adapter = adapter
         viewModel = ViewModelProviders.of(this, AddItemsViewModel.Factory(activity!!.application, listName)).get(AddItemsViewModel::class.java)
 

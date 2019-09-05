@@ -1,6 +1,7 @@
 package com.synowkrz.housemanager.shopList.adapters
 
 
+import android.app.Application
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,7 @@ import com.synowkrz.housemanager.getMeasurmentString
 import com.synowkrz.housemanager.shopList.model.PersistentShopItem
 import java.util.*
 
-class AddItemListAdapter(val onClickListener: OnClickListener, val addToListAvialable : Boolean = true)
+class AddItemListAdapter(val onClickListener: OnClickListener, val app : Application, val addToListAvialable : Boolean = true)
     : ListAdapter<PersistentShopItem, AddItemListAdapter.AddItemViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AddItemViewHolder {
@@ -23,7 +24,7 @@ class AddItemListAdapter(val onClickListener: OnClickListener, val addToListAvia
 
     override fun onBindViewHolder(holder: AddItemViewHolder, position: Int) {
         val item = getItem(position)
-        holder.itemView.setBackgroundColor(getColorByCategory(item.category))
+        holder.itemView.setBackgroundColor(getColorByCategory(item.category, app))
 
         if (addToListAvialable) {
             holder.binding.addProduct.setOnClickListener{

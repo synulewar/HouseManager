@@ -39,6 +39,7 @@ class ShopListFragment : Fragment() {
         binding.mainShopList.adapter = ShopListAdapter(ShopListAdapter.OnShopListClickListener{
             findNavController().navigate(ShopListFragmentDirections.actionShopListFragmentToShoppingFragment(it.name, viewModel.getSortString(it.shopName)))
         }, ShopListAdapter.OnShopListLongClickListener{
+            viewModel.removeShopList(it)
             true
         })
         binding.viewModel = viewModel

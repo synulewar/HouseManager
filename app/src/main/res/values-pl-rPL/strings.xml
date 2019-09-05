@@ -113,12 +113,12 @@
         <item>@string/fruit_vegetables_category</item>
         <item>@string/meat_category</item>
         <item>@string/dairy_category</item>
+        <item>@string/can_preserves_category</item>
         <item>@string/alcohol_category</item>
         <item>@string/sweets_category</item>
         <item>@string/snacks_category</item>
         <item>@string/hygiene_category</item>
         <item>@string/drinkables_category</item>
-        <item>@string/can_preserves_category</item>
         <item>@string/other_category</item>
     </string-array>
 
@@ -129,6 +129,7 @@
         <item>@string/fruit_vegetables_category</item>
         <item>@string/meat_category</item>
         <item>@string/dairy_category</item>
+        <item>@string/can_preserves_category</item>
         <item>@string/alcohol_category</item>
         <item>@string/sweets_category</item>
         <item>@string/snacks_category</item>

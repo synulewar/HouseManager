@@ -40,9 +40,9 @@ class ShopAreaListViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun deleteShopArea(name: String) {
+    fun deleteShopArea(shopArea: ShopArea) {
         viewModelScope.launch {
-            repository.deletetShopArea(name)
+            repository.deletetShopArea(shopArea)
         }
     }
 
