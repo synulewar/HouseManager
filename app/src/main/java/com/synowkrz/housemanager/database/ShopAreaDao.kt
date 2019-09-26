@@ -1,16 +1,13 @@
 package com.synowkrz.housemanager.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.synowkrz.housemanager.shopList.model.ShopArea
 
 @Dao
 interface ShopAreaDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(shopArea: ShopArea)
 
     @Update

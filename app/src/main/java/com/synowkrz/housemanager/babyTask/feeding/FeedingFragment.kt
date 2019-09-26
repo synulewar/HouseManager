@@ -38,7 +38,7 @@ class FeedingFragment : Fragment() {
         binding.viewModel = viewModel
         binding.recyclerView.adapter = BabyEventListAdapter(BabyEventListAdapter.OnBabyEventClickListener{
             Toast.makeText(activity, "Klikniety event", Toast.LENGTH_SHORT).show()
-        })
+        }, activity!!.application)
 
 
         viewModel.feedingStateView.observe(this, Observer {

@@ -42,6 +42,14 @@ class HouseRepository(private val app: Application) {
         }
     }
 
+    suspend fun updateShopList(shopList: ShopList) {
+        withContext(Dispatchers.IO) {
+            Log.d(TAG, "Update shopList ${shopList.name}")
+            database.shopListDao.update(shopList)
+            firebaseDatabase.child(SHOP_LIST_KEY).child(shopList.name).setValue(shopList)
+        }
+    }
+
     suspend fun removeShopList(shopList: ShopList) {
         withContext(Dispatchers.IO) {
             database.shopListDao.deleteShopList(shopList.name)

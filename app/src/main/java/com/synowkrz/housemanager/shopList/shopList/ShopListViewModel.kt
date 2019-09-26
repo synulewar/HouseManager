@@ -60,6 +60,12 @@ class ShopListViewModel(val app: Application) : AndroidViewModel(app) {
         }
     }
 
+    fun updateShopList(shopList: ShopList) {
+        viewModelScope.launch {
+            repository.updateShopList(shopList)
+        }
+    }
+
     fun getSortString(name: String) : String {
         if (asyncShopArea == null) {
             return ""

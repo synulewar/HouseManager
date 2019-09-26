@@ -31,6 +31,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="new_shop_list">Enter new list name</string>
     <string name="new_list_title">Add new list</string>
+    <string name="edit_list">Edit list</string>
     <string name="bread">bread</string>
     <string name="bun">bun</string>
     <string name="muffin">muffin</string>
@@ -105,6 +106,8 @@
     <string name="quantity">Quantity</string>
     <string name="shop_area">Shop area</string>
     <string name="all_categories">All</string>
+
+    <string name="feed_event">%s eated %d min.</string>
 
     <string-array name="category_list">
         <item>@string/bread_category</item>

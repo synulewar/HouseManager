@@ -1,10 +1,14 @@
 package com.synowkrz.housemanager.babyTask
 
+import android.app.Application
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.synowkrz.housemanager.R
+import com.synowkrz.housemanager.TAG
 import com.synowkrz.housemanager.babyTask.model.BabyEvent
 import com.synowkrz.housemanager.babyTask.model.EventType
 import com.synowkrz.housemanager.babyTask.model.FeedingType
@@ -13,9 +17,9 @@ import com.synowkrz.housemanager.transformFeedingTypeIntoImageResource
 import java.text.SimpleDateFormat
 import java.util.*
 
-class BabyEventListAdapter(val onBabyEventClickListener: OnBabyEventClickListener) : ListAdapter<BabyEvent, BabyEventListAdapter.BabyEventViewHolder>(DiffCallback) {
+class BabyEventListAdapter(val onBabyEventClickListener: OnBabyEventClickListener, val app: Application) : ListAdapter<BabyEvent, BabyEventListAdapter.BabyEventViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BabyEventViewHolder {
-        return BabyEventViewHolder(BabyEventListItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return BabyEventViewHolder(BabyEventListItemBinding.inflate(LayoutInflater.from(parent.context)), app)
     }
 
     override fun onBindViewHolder(holder: BabyEventViewHolder, position: Int) {
@@ -40,7 +44,7 @@ class BabyEventListAdapter(val onBabyEventClickListener: OnBabyEventClickListene
         fun onClick(event: BabyEvent) = clickListener(event)
     }
 
-    class BabyEventViewHolder(val binding: BabyEventListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class BabyEventViewHolder(val binding: BabyEventListItemBinding, val app: Application) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(event: BabyEvent) {
             when(event.babyEvent.eventType) {
                   EventType.FEED -> bindFeedEvent(event)
@@ -54,12 +58,13 @@ class BabyEventListAdapter(val onBabyEventClickListener: OnBabyEventClickListene
         private fun bindFeedEvent(event: BabyEvent) {
             binding.eventImage.setImageResource(transformFeedingTypeIntoImageResource(FeedingType.valueOf(event.subType!!)))
             var minutes = event.duration?.div(60000)
+            Log.d(TAG, "Event duration ${minutes}")
             var startDate = Date(event.startTime)
             var endDate = Date(event.endTime!!)
             //Make it work with possible translations
             var dayFormater = SimpleDateFormat("dd/MM HH:mm")
             var timeFormater = SimpleDateFormat("HH:mm")
-            binding.eventMainDescription.text = "${event.profile} eated ${minutes} min."
+            binding.eventMainDescription.text = String.format(app.getString(R.string.feed_event, event.profile, event.duration))
             binding.eventSecondaryDescription.text = "From ${dayFormater.format(startDate)} till ${timeFormater.format(endDate)}"
         }
     }

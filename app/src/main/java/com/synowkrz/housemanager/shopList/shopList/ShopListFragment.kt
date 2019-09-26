@@ -36,8 +36,13 @@ class ShopListFragment : Fragment() {
                 viewModel.onAddNewListFinished()
             }
         })
-        binding.mainShopList.adapter = ShopListAdapter(ShopListAdapter.OnShopListClickListener{
-            findNavController().navigate(ShopListFragmentDirections.actionShopListFragmentToShoppingFragment(it.name, viewModel.getSortString(it.shopName)))
+        binding.mainShopList.adapter = ShopListAdapter(ShopListAdapter.OnShopListClickListener{ shopList, view ->
+            if (view.id == R.id.edit_item) {
+                showEditListDialog(shopList)
+            } else {
+                findNavController().navigate(ShopListFragmentDirections.actionShopListFragmentToShoppingFragment(shopList.name, viewModel.getSortString(shopList.shopName)))
+            }
+
         }, ShopListAdapter.OnShopListLongClickListener{
             viewModel.removeShopList(it)
             true
@@ -76,5 +81,39 @@ class ShopListFragment : Fragment() {
             Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show()
         }
         builder.show()
+    }
+
+
+    fun showEditListDialog(shopList: ShopList) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(getString(R.string.edit_list))
+        val view = layoutInflater.inflate(R.layout.dialog_new_list, null)
+        val editText = view.findViewById(R.id.new_list_edit) as EditText
+        val spinner = view.findViewById(R.id.areas_spinner) as Spinner
+        viewModel.areaNames.observe( this, Observer {
+            if (it !=  null) {
+                val areasList = it
+                var spinnerArray = Array(it.size) {
+                    areasList[it]
+                }
+                val adapter = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, spinnerArray)
+                spinner.adapter = adapter
+            }
+        }
+        )
+        editText.setText(shopList.name)
+        builder.setView(view)
+
+        builder.setPositiveButton(android.R.string.ok) { dialogInterface, i ->
+            val newList = editText.text.toString()
+            val shopArea = spinner.selectedItem.toString()
+            viewModel.updateShopList(ShopList(newList, shopArea))
+        }
+
+        builder.setNegativeButton(android.R.string.cancel) { dialogInterface, i ->
+            Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show()
+        }
+        builder.show()
+
     }
 }

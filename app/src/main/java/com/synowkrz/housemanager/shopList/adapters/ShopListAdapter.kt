@@ -1,6 +1,7 @@
 package com.synowkrz.housemanager.shopList.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -18,7 +19,11 @@ class ShopListAdapter(val onShopListClickListener: OnShopListClickListener,
         val item = getItem(position)
 
         holder.itemView.setOnClickListener {
-            onShopListClickListener.onClick(item)
+            onShopListClickListener.onClick(item, it)
+        }
+
+        holder.binding.editItem.setOnClickListener {
+            onShopListClickListener.onClick(item, it)
         }
 
         holder.itemView.setOnLongClickListener {
@@ -45,8 +50,8 @@ class ShopListAdapter(val onShopListClickListener: OnShopListClickListener,
         }
     }
 
-    class OnShopListClickListener(val clickListener: (shopList: ShopList) -> Unit) {
-        fun onClick(shopList: ShopList) = clickListener(shopList)
+    class OnShopListClickListener(val clickListener: (shopList: ShopList, view: View) -> Unit) {
+        fun onClick(shopList: ShopList, view: View) = clickListener(shopList, view)
     }
 
     class OnShopListLongClickListener(val clickListener: (shopList: ShopList) -> Boolean) {

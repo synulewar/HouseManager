@@ -142,11 +142,11 @@ class FeedingViewModel(val app: Application, val name: String): AndroidViewModel
     fun onStopPressed() {
         feedingState = FeedingState.STOPPED
         viewModelScope.launch {
+            Log.d(TAG, "Feeding duration ${feedingDuration.value!!}")
             val feeding = Feeding(feedingStartTime, name, mFeedingType!!, System.currentTimeMillis(), feedingDuration.value!!)
             repository.insertFeeding(feeding)
         }
         clearTask()
-        feedingDuration.value = 0L
     }
 
     private fun clearTask() {
@@ -168,6 +168,7 @@ class FeedingViewModel(val app: Application, val name: String): AndroidViewModel
 
     private fun saveOnGoingFeeding(startTime: Long, duration: Long) {
         val sharedPref = app.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
+        Log.d(TAG, "Current feeding duration ${duration}")
         sharedPref.edit()
             .putBoolean(BABY_FEED_ON_GOING + name, true)
             .putLong(FEEDIG_START_TIME + name, startTime)

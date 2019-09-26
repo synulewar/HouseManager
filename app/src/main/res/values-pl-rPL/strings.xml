@@ -30,6 +30,7 @@
     <string name="title_notifications">Powiadomienia</string>
     <string name="new_shop_list">Wpisz nową nazwę listy</string>
     <string name="new_list_title">Dodaj nową listę</string>
+    <string name="edit_list">Edytuj liste</string>
     <string name="bread">chleb</string>
     <string name="bun">kok</string>
     <string name="muffin">bułeczka</string>
@@ -105,6 +106,8 @@
     <string name="weight">Waga</string>
     <string name="volume">Objętość</string>
     <string name="quantity">Ilość</string>
+
+    <string name="feed_event">%s jadła %d min.</string>
 
 
 
