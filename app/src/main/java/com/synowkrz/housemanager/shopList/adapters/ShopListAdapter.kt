@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.synowkrz.housemanager.databinding.MainShopListItemBinding
-import com.synowkrz.housemanager.shopList.model.ShopList
+import com.synowkrz.housemanager.shopList.model.ExtendedShopList
 
 class ShopListAdapter(val onShopListClickListener: OnShopListClickListener,
-                      val onShopListLongClickListener: OnShopListLongClickListener) : ListAdapter<ShopList, ShopListAdapter.ShopListViewHolder>(DiffCallback) {
+                      val onShopListLongClickListener: OnShopListLongClickListener) : ListAdapter<ExtendedShopList, ShopListAdapter.ShopListViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopListViewHolder {
         return ShopListViewHolder(MainShopListItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
@@ -35,26 +35,26 @@ class ShopListAdapter(val onShopListClickListener: OnShopListClickListener,
 
 
     class ShopListViewHolder(val binding: MainShopListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(list: ShopList) {
+        fun onBind(list: ExtendedShopList) {
             binding.property = list
         }
     }
 
-    companion object DiffCallback: DiffUtil.ItemCallback<ShopList>() {
-        override fun areItemsTheSame(oldItem: ShopList, newItem: ShopList): Boolean {
-            return oldItem.name == newItem.name
+    companion object DiffCallback: DiffUtil.ItemCallback<ExtendedShopList>() {
+        override fun areItemsTheSame(oldItem: ExtendedShopList, newItem: ExtendedShopList): Boolean {
+            return oldItem.shopList.name == newItem.shopList.name
         }
 
-        override fun areContentsTheSame(oldItem: ShopList, newItem: ShopList): Boolean {
-            return oldItem.name == newItem.name
+        override fun areContentsTheSame(oldItem: ExtendedShopList, newItem: ExtendedShopList): Boolean {
+            return oldItem.shopList.name == newItem.shopList.name && oldItem.itemNumber == newItem.itemNumber
         }
     }
 
-    class OnShopListClickListener(val clickListener: (shopList: ShopList, view: View) -> Unit) {
-        fun onClick(shopList: ShopList, view: View) = clickListener(shopList, view)
+    class OnShopListClickListener(val clickListener: (shopList: ExtendedShopList, view: View) -> Unit) {
+        fun onClick(shopList: ExtendedShopList, view: View) = clickListener(shopList, view)
     }
 
-    class OnShopListLongClickListener(val clickListener: (shopList: ShopList) -> Boolean) {
-        fun onClick(shopList: ShopList) = clickListener(shopList)
+    class OnShopListLongClickListener(val clickListener: (shopList: ExtendedShopList) -> Boolean) {
+        fun onClick(shopList: ExtendedShopList) = clickListener(shopList)
     }
 }

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.synowkrz.housemanager.TAG
 import com.synowkrz.housemanager.repository.HouseRepository
+import com.synowkrz.housemanager.shopList.model.ExtendedShopList
 import com.synowkrz.housemanager.shopList.model.ShopArea
 import com.synowkrz.housemanager.shopList.model.ShopList
 import kotlinx.coroutines.*
@@ -16,6 +17,8 @@ class ShopListViewModel(val app: Application) : AndroidViewModel(app) {
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
     private val shopAreas : LiveData<List<ShopArea>> = repository.shopAreas
     private var asyncShopArea : List<ShopArea>? = null
+
+    private var asyncShopList : List<ShopList>? = null
 
 
     var areasConverter : (List<ShopArea>) -> List<String> = {
@@ -33,14 +36,34 @@ class ShopListViewModel(val app: Application) : AndroidViewModel(app) {
     val onAddNewList : LiveData<Boolean>
         get() = _onAddNewList
 
-    val itemList : LiveData<List<ShopList>>
+    val itemList = MutableLiveData<List<ExtendedShopList>>()
 
     init {
-        itemList = repository.shopList
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 asyncShopArea = repository.getAllShopAreaAsync()
+                refreshShopList()
                 Log.d(TAG, "Async shop are size available")
+            }
+        }
+    }
+
+
+    fun refreshShopList() {
+        Log.d(TAG, "refreshShopList")
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                asyncShopList = repository.getAllShopListsAsycn()
+                var extendedShopList = mutableListOf<ExtendedShopList>()
+                asyncShopList?.let {
+                    for (shopList in it) {
+                        extendedShopList.add(ExtendedShopList(shopList, repository.getAllActivetemsCountFromList(shopList.name).toString()))
+                    }
+                }
+                for (item in extendedShopList) {
+                    Log.d(TAG, item.toString())
+                }
+                itemList.postValue(extendedShopList)
             }
         }
     }

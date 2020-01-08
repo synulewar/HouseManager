@@ -6,7 +6,7 @@
     <data>
         <variable
                 name="property"
-                type="com.synowkrz.housemanager.shopList.model.ShopList" />
+                type="com.synowkrz.housemanager.shopList.model.ExtendedShopList" />
     </data>
 
 
@@ -22,7 +22,14 @@
                     android:layout_weight="7"
                     android:id="@+id/list_name"
                     android:layout_margin="@dimen/standard_margin"
-                    android:text="@{property.name}"/>
+                    android:text="@{property.shopList.name}"/>
+
+            <TextView android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/list_count"
+                    android:layout_margin="@dimen/standard_margin"
+                    android:text="@{property.itemNumber}"/>
 
             <Button
                     android:id="@+id/edit_item"

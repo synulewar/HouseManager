@@ -58,6 +58,10 @@ class HouseRepository(private val app: Application) {
         return database.shopListDao.getAllShopListAsync()
     }
 
+    fun getAllActivetemsCountFromList(listName : String) : Int {
+        return database.shopItemDao.getAllActivetemsCountFromList(listName)
+    }
+
 
     fun registerShopListListener() {
         firebaseDatabase.child(SHOP_LIST_KEY).addChildEventListener(object : ChildEventListener {

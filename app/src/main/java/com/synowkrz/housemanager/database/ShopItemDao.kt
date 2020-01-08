@@ -23,4 +23,7 @@ interface ShopItemDao {
 
     @Delete
     fun deleteShopItem(shopItem: ShopItem)
+
+    @Query("SELECT COUNT(*) FROM shop_item where listName = :listName and active = 1")
+    fun getAllActivetemsCountFromList(listName : String) : Int
 }

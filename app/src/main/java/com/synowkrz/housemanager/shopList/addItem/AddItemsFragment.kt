@@ -24,8 +24,6 @@ class AddItemsFragment : Fragment() {
     private lateinit var listName: String
     private lateinit var adapter : AddItemListAdapter
     private var categoryPosition : Int? = null
-    private var categoryName : String? = null
-    private var currentSearchText : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,15 +72,12 @@ class AddItemsFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 Log.d(TAG, "onQueryTextChange ${newText}")
-                currentSearchText = newText
                 newText?.let {
                     viewModel.changeDataSource(newText)
                 }
                 return true
             }
         })
-
-
 
         binding.viewModel = viewModel
         return binding.root

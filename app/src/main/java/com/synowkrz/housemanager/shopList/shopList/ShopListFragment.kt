@@ -38,13 +38,13 @@ class ShopListFragment : Fragment() {
         })
         binding.mainShopList.adapter = ShopListAdapter(ShopListAdapter.OnShopListClickListener{ shopList, view ->
             if (view.id == R.id.edit_item) {
-                showEditListDialog(shopList)
+                showEditListDialog(shopList.shopList)
             } else {
-                findNavController().navigate(ShopListFragmentDirections.actionShopListFragmentToShoppingFragment(shopList.name, viewModel.getSortString(shopList.shopName)))
+                findNavController().navigate(ShopListFragmentDirections.actionShopListFragmentToShoppingFragment(shopList.shopList.name, viewModel.getSortString(shopList.shopList.shopName)))
             }
 
         }, ShopListAdapter.OnShopListLongClickListener{
-            viewModel.removeShopList(it)
+            viewModel.removeShopList(it.shopList)
             true
         })
         binding.viewModel = viewModel
@@ -114,6 +114,10 @@ class ShopListFragment : Fragment() {
             Toast.makeText(context, "Cancel", Toast.LENGTH_SHORT).show()
         }
         builder.show()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.refreshShopList()
     }
 }

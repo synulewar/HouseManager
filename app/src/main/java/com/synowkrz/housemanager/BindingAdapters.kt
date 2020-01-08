@@ -32,7 +32,7 @@ fun bindPersistentListRecyclerView(recyclerView: RecyclerView, data: List<Persis
 
 
 @BindingAdapter("shopListData")
-fun bindShopListRecyclerView(recyclerView: RecyclerView, data: List<ShopList>?) {
+fun bindShopListRecyclerView(recyclerView: RecyclerView, data: List<ExtendedShopList>?) {
     val adapter = recyclerView.adapter as ShopListAdapter
     adapter.submitList(data)
 }

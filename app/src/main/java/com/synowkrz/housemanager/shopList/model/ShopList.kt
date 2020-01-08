@@ -7,3 +7,6 @@ import androidx.room.PrimaryKey
 class ShopList(@PrimaryKey
                var name: String = "",
                var shopName: String = "")
+
+
+data class ExtendedShopList(var shopList: ShopList, var itemNumber: String = "0")
