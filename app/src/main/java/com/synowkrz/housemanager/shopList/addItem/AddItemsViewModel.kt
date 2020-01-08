@@ -70,6 +70,30 @@ class AddItemsViewModel(val app: Application, val listName: String) : AndroidVie
         }
     }
 
+    fun changeDataSource(query : String) {
+        Log.d(TAG, "Change data source query ${query}")
+
+        if (query.isEmpty()) {
+            changeDataSource(currentCategory)
+        }
+
+        if (query.length < 2) {
+            return
+        }
+
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                if (currentCategory == Category.ALL) {
+                    _itemList.postValue(repository.getPersistentShopItemByNamePart(query))
+                } else {
+                    _itemList.postValue(repository.getPersistentShopItemByNamePartAndCategory(query, currentCategory))
+                }
+            }
+        }
+
+
+    }
+
     class Factory(val app: Application, val listName: String) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AddItemsViewModel::class.java)) {

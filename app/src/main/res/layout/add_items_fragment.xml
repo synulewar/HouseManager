@@ -17,13 +17,22 @@
 
         <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/category_spinner_search"
                 android:entries="@array/category_list_with_all"
                 android:layout_margin="@dimen/small_margin"/>
+
+        <SearchView
+                android:id="@+id/item_search_view"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/category_spinner_search" />
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/item_list"
@@ -35,7 +44,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/category_spinner_search"
+                app:layout_constraintTop_toBottomOf="@id/item_search_view"
                 tools:itemCount="8"
                 tools:listitem="@layout/add_item_list_item">
         </androidx.recyclerview.widget.RecyclerView>

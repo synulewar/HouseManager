@@ -12,10 +12,7 @@ import com.synowkrz.housemanager.babyTask.model.BabyProfile
 import com.synowkrz.housemanager.babyTask.model.Feeding
 import com.synowkrz.housemanager.database.HouseManagerDatabase
 import com.synowkrz.housemanager.model.TaskGridItem
-import com.synowkrz.housemanager.shopList.model.PersistentShopItem
-import com.synowkrz.housemanager.shopList.model.ShopArea
-import com.synowkrz.housemanager.shopList.model.ShopItem
-import com.synowkrz.housemanager.shopList.model.ShopList
+import com.synowkrz.housemanager.shopList.model.*
 import kotlinx.coroutines.*
 import java.sql.SQLException
 
@@ -139,6 +136,14 @@ class HouseRepository(private val app: Application) {
 
     suspend fun getPersistentShopItemByName(name: String) : PersistentShopItem? {
         return database.persistentShopItemDao.getPersistentShopItemByName(name)
+    }
+
+    suspend fun getPersistentShopItemByNamePart(name: String) : List<PersistentShopItem>? {
+        return database.persistentShopItemDao.getPersistentShopItemByNamePart("%${name}%")
+    }
+
+    suspend fun getPersistentShopItemByNamePartAndCategory(name: String, category: Category) : List<PersistentShopItem>? {
+        return database.persistentShopItemDao.getPersistentShopItemByNamePartAndCategory("%${name}%", category.toString())
     }
 
     fun getAllPersistentItems() : LiveData<List<PersistentShopItem>> {

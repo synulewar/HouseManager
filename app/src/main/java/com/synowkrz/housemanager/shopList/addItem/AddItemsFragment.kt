@@ -6,10 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.EditText
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -27,6 +24,8 @@ class AddItemsFragment : Fragment() {
     private lateinit var listName: String
     private lateinit var adapter : AddItemListAdapter
     private var categoryPosition : Int? = null
+    private var categoryName : String? = null
+    private var currentSearchText : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,10 +61,29 @@ class AddItemsFragment : Fragment() {
                 val stringArray = resources.getStringArray(R.array.category_list_with_all)
                 Toast.makeText(context, stringArray[position], Toast.LENGTH_SHORT).show()
                 categoryPosition = position
+                binding.itemSearchView.setQuery("", false)
                 viewModel.changeDataSource(getCategoryFromString(stringArray[position]))
             }
 
         }
+
+        binding.itemSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d(TAG, "onQueryTextChange ${newText}")
+                currentSearchText = newText
+                newText?.let {
+                    viewModel.changeDataSource(newText)
+                }
+                return true
+            }
+        })
+
+
+
         binding.viewModel = viewModel
         return binding.root
     }
