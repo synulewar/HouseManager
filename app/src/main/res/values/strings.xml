@@ -120,7 +120,6 @@
         <item>@string/snacks_category</item>
         <item>@string/hygiene_category</item>
         <item>@string/drinkables_category</item>
-
         <item>@string/other_category</item>
     </string-array>
 
@@ -140,9 +139,9 @@
     </string-array>
 
     <string-array name="measurment_list">
+        <item>@string/quantity</item>
         <item>@string/weight</item>
         <item>@string/volume</item>
-        <item>@string/quantity</item>
     </string-array>
 
 </resources>

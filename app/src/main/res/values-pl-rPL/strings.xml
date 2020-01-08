@@ -142,9 +142,9 @@
     </string-array>
 
     <string-array name="measurment_list">
+        <item>@string/quantity</item>
         <item>@string/weight</item>
         <item>@string/volume</item>
-        <item>@string/quantity</item>
     </string-array>
 
 

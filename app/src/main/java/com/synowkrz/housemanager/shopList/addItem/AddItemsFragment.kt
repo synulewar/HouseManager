@@ -26,6 +26,7 @@ class AddItemsFragment : Fragment() {
     private lateinit var binding: AddItemsFragmentBinding
     private lateinit var listName: String
     private lateinit var adapter : AddItemListAdapter
+    private var categoryPosition : Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +61,7 @@ class AddItemsFragment : Fragment() {
             override fun onItemSelected(adapter: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val stringArray = resources.getStringArray(R.array.category_list_with_all)
                 Toast.makeText(context, stringArray[position], Toast.LENGTH_SHORT).show()
+                categoryPosition = position
                 viewModel.changeDataSource(getCategoryFromString(stringArray[position]))
             }
 
@@ -96,6 +98,12 @@ class AddItemsFragment : Fragment() {
 
             viewModel.addNewPersistentShopItem(nameView.text.toString(),
                 amountView.text.toString(), category, measurement)
+        }
+
+        categoryPosition?.let {
+            if (it != 0) {
+                categoryView.setSelection(it - 1)
+            }
         }
         builder.show()
         viewModel.onAddNewItemFinished()
