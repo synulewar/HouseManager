@@ -12,6 +12,9 @@ interface ShopItemDao {
     @Update
     fun update(shopItem: ShopItem)
 
+    @Query("SELECT * FROM shop_item where id = :id")
+    fun getShopItemByID(id : Long) : ShopItem?
+
     @Query("SELECT * FROM shop_item where listName = :listName and active = 1")
     fun getAllActivetemsFromList(listName : String) : LiveData<List<ShopItem>>
 

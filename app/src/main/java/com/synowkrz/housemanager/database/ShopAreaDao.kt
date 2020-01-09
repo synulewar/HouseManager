@@ -23,5 +23,5 @@ interface ShopAreaDao {
     fun getAllShopAreasAsync() : List<ShopArea>
 
     @Query("SELECT * FROM shop_area WHERE name = :name")
-    fun getShopAreByName(name: String) : ShopArea
+    fun getShopAreByName(name: String) : ShopArea?
 }

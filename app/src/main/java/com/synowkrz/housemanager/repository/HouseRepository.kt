@@ -54,6 +54,10 @@ class HouseRepository(private val app: Application) {
         }
     }
 
+    fun getShopListByNameAsync(name: String) : ShopList? {
+        return database.shopListDao.getShopListByNameAsync(name)
+    }
+
     fun getAllShopListsAsycn() : List<ShopList> {
         return database.shopListDao.getAllShopListAsync()
     }
@@ -97,11 +101,8 @@ class HouseRepository(private val app: Application) {
 
     suspend fun resolveShopList(shopList: ShopList) {
         withContext(Dispatchers.IO) {
-            val shopLists = getAllShopListsAsycn()
-            for (shop in shopLists) {
-                if (shopList.name == shop.name) {
-                    return@withContext
-                }
+            if (getShopListByNameAsync(shopList.name) != null) {
+                return@withContext
             }
             Log.d(TAG, "Insert new shopList ${shopList}")
             database.shopListDao.insert(shopList)
@@ -189,15 +190,13 @@ class HouseRepository(private val app: Application) {
 
     suspend fun resolvePersistentShopItem(persistentShopItem: PersistentShopItem) {
         withContext(Dispatchers.IO) {
-            val itemList = getAllPersistentItemAsync()
-            for (item in itemList) {
-                if (item.name == persistentShopItem.name) {
-                    if (persistentShopItem.usage > item.usage) {
-                        database.persistentShopItemDao.update(persistentShopItem)
-                        Log.d(TAG, "Update usage old ${item.name} ${item.usage} new ${persistentShopItem.name} ${persistentShopItem.usage}")
-                    }
-                    return@withContext
+            val item = getPersistentShopItemByName(persistentShopItem.name)
+            if (item?.name == persistentShopItem.name) {
+                if (persistentShopItem.usage > item.usage) {
+                    database.persistentShopItemDao.update(persistentShopItem)
+                    Log.d(TAG, "Update usage old ${item.name} ${item.usage} new ${persistentShopItem.name} ${persistentShopItem.usage}")
                 }
+                return@withContext
             }
             Log.d(TAG, "Add new persistent shop item ${persistentShopItem.name}")
             database.persistentShopItemDao.insert(persistentShopItem)
@@ -210,7 +209,7 @@ class HouseRepository(private val app: Application) {
         return database.shopAreaDao.getAllShopAreas()
     }
 
-    fun getShopAreaByName(name: String) : ShopArea {
+    fun getShopAreaByName(name: String) : ShopArea? {
         return database.shopAreaDao.getShopAreByName(name)
     }
 
@@ -273,14 +272,12 @@ class HouseRepository(private val app: Application) {
 
     suspend fun resolveShopArea(shopArea: ShopArea) {
         withContext(Dispatchers.IO) {
-            val itemList = getAllShopAreaAsync()
-            for (item in itemList) {
-                if (item.name == shopArea.name) {
-                    if (item.areas != shopArea.areas) {
-                        updateShopArea(shopArea)
-                    }
-                    return@withContext
+            val item = getShopAreaByName(shopArea.name)
+            if (item?.name == shopArea.name) {
+                if (item.areas != shopArea.areas) {
+                    updateShopArea(shopArea)
                 }
+                return@withContext
             }
             Log.d(TAG, "Add new shopArea ${shopArea.name}")
             database.shopAreaDao.insert(shopArea)
@@ -315,6 +312,10 @@ class HouseRepository(private val app: Application) {
 
     suspend fun getAllShopItemsAsync() : List<ShopItem> {
         return database.shopItemDao.getAllItemsAsync()
+    }
+
+    fun getShopItemById(id : Long) : ShopItem? {
+        return database.shopItemDao.getShopItemByID(id)
     }
 
     suspend fun deleteShopItem(shopItem: ShopItem) {
@@ -366,16 +367,13 @@ class HouseRepository(private val app: Application) {
 
     suspend fun resolveShopItem(shopItem: ShopItem) {
         withContext(Dispatchers.IO) {
-            val itemList = getAllShopItemsAsync()
-            for (item in itemList) {
-                Log.d(TAG, "Update Shop Item ${shopItem.name}")
-                if (item.id == shopItem.id) {
-                    if (item.active != shopItem.active) {
-                        Log.d(TAG, "Update Shop Item ${shopItem.name}")
-                        updateShopItem(shopItem)
-                    }
-                    return@withContext
+            val item = getShopItemById(shopItem.id)
+            if (item?.id == shopItem.id) {
+                if (item.active != shopItem.active) {
+                    Log.d(TAG, "Update Shop Item ${shopItem.name}")
+                    updateShopItem(shopItem)
                 }
+                return@withContext
             }
             Log.d(TAG, "Add new shopItem ${shopItem.name}")
             database.shopItemDao.insert(shopItem)

@@ -41,7 +41,7 @@ class ShopAreaConfiguratorViewModel(val app: Application, val shopAreaName: Stri
             withContext(Dispatchers.IO) {
                 areaNotAssign.addAll(Category.values())
                 areaNotAssign.remove(Category.ALL)
-                currentShopArea = repository.getShopAreaByName(shopAreaName)
+                currentShopArea = repository.getShopAreaByName(shopAreaName)!!
                 Log.d(TAG, "Saved areas ${currentShopArea.areas}")
                 for (cat in currentShopArea.areas.split(DELIMITER)) {
                     if (cat == "") {

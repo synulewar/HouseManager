@@ -73,6 +73,7 @@ class AddItemsViewModel(val app: Application, val listName: String) : AndroidVie
     fun changeDataSource(query : String) {
         Log.d(TAG, "Change data source query ${query}")
 
+
         if (query.isEmpty()) {
             changeDataSource(currentCategory)
         }
@@ -90,7 +91,6 @@ class AddItemsViewModel(val app: Application, val listName: String) : AndroidVie
                 }
             }
         }
-
 
     }
 
