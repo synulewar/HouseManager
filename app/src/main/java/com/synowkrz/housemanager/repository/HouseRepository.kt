@@ -192,6 +192,10 @@ class HouseRepository(private val app: Application) {
             val itemList = getAllPersistentItemAsync()
             for (item in itemList) {
                 if (item.name == persistentShopItem.name) {
+                    if (persistentShopItem.usage > item.usage) {
+                        database.persistentShopItemDao.update(persistentShopItem)
+                        Log.d(TAG, "Update usage old ${item.name} ${item.usage} new ${persistentShopItem.name} ${persistentShopItem.usage}")
+                    }
                     return@withContext
                 }
             }
