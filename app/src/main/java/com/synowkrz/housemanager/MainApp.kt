@@ -9,7 +9,7 @@ import com.synowkrz.housemanager.repository.HouseRepository
 class MainApp : Application() {
 
     companion object {
-        val UPDATE_DELAYED = 20_000L
+        val UPDATE_DELAYED = 10_000L
     }
 
     private lateinit var repository : HouseRepository
@@ -30,8 +30,9 @@ class MainApp : Application() {
         handlerThread.start()
         var handler = Handler(handlerThread.looper)
         handler.postDelayed({
-            Log.d(TAG, "Schelude sendNewItemsToRemoteDatabase task")
-            repository.sendNewItemsToRemoteDatabase()
+            Log.d(TAG, "Schelude syncWithRemoteDatabase task")
+            repository.syncWithRemoteDatabase()
+            Log.d(TAG, "Finish syncWithRemoteDatabase")
         }, UPDATE_DELAYED)
     }
 }

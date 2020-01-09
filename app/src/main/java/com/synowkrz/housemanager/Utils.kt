@@ -13,6 +13,7 @@ val SHOP_LIST_KEY = "shopLists"
 val PERSISTENT_SHOP_KEY = "persistentShopItem"
 val SHOP_AREA_KEY = "shopArea"
 val SHOP_ITEM_KEY = "shopItem"
+val STORAGE_TIMELIMIT = 1000 * 60 * 60 * 24
 
 fun convertTypeTaskToResourceString(taskTypes: TaskTypes) : String {
     return when(taskTypes) {

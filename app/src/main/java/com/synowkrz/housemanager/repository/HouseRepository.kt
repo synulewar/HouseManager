@@ -313,6 +313,14 @@ class HouseRepository(private val app: Application) {
         return database.shopItemDao.getAllItemsAsync()
     }
 
+    suspend fun deleteShopItem(shopItem: ShopItem) {
+        withContext(Dispatchers.IO) {
+            Log.d(TAG, "Remove outdated shop item ${shopItem}")
+            database.shopItemDao.deleteShopItem(shopItem)
+            firebaseDatabase.child(SHOP_ITEM_KEY).child(shopItem.id.toString()).removeValue()
+        }
+    }
+
 
     fun registerItemListListener() {
         firebaseDatabase.child(SHOP_ITEM_KEY).addChildEventListener(object : ChildEventListener {
@@ -429,10 +437,18 @@ class HouseRepository(private val app: Application) {
         return database.feedingDao.getAllFeedingsByName(name)
     }
 
-    fun sendNewItemsToRemoteDatabase() {
+    fun syncWithRemoteDatabase() {
         repositoryScope.launch {
             withContext(Dispatchers.IO) {
                 var itemList = getAllShopItemsAsync()
+
+                for (item in itemList) {
+                    if (!item.active && (System.currentTimeMillis() - item.id) > STORAGE_TIMELIMIT) {
+                        deleteShopItem(item)
+                    }
+                }
+                // get new list and send to remote
+                itemList = getAllShopItemsAsync()
                 for (item in itemList) {
                     firebaseDatabase.child(SHOP_ITEM_KEY).child(item.id.toString()).setValue(item)
                 }
