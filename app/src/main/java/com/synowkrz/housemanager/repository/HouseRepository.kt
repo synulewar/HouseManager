@@ -1,6 +1,7 @@
 package com.synowkrz.housemanager.repository
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.google.firebase.database.ChildEventListener
@@ -19,7 +20,7 @@ import kotlinx.coroutines.*
 import java.sql.SQLException
 import java.time.LocalDate
 
-class HouseRepository(private val app: Application) {
+class HouseRepository(private val app: Context) {
 
     private val database = HouseManagerDatabase.getInstance(app)
     val items by lazy { database.taskItemDao.getAllTasks() }

@@ -115,6 +115,8 @@
 
     <string name="add_new_home_task_title">Dodaj nowe zadanie</string>
 
+    <string name="pending_tasks">%d zadan czekaja na wykonanie!</string>
+
     <string name="delete_confirmation">Czy na pewno chcesz usunac to zadanie?</string>
 
     <string-array name="interval_array">

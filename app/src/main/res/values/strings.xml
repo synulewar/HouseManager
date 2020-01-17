@@ -121,6 +121,8 @@
 
     <string name="delete_confirmation">Do you realy want to delete this task? All activities will be lost.</string>
 
+    <string name="pending_tasks">%d tasks are waiting to be resolved</string>
+
     <string-array name="interval_array">
         <item>@string/days</item>
         <item>@string/weeks</item>

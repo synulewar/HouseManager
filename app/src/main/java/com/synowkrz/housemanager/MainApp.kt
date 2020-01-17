@@ -1,10 +1,14 @@
 package com.synowkrz.housemanager
 
 import android.app.Application
+import android.app.Notification
 import android.os.Handler
 import android.os.HandlerThread
 import android.util.Log
+import androidx.work.*
+import com.synowkrz.housemanager.backgroundTask.NotificationWorker
 import com.synowkrz.housemanager.repository.HouseRepository
+import java.util.concurrent.TimeUnit
 
 class MainApp : Application() {
 
@@ -36,6 +40,16 @@ class MainApp : Application() {
             repository.syncWithRemoteDatabase()
             Log.d(TAG, "Finish syncWithRemoteDatabase")
         }, UPDATE_DELAYED)
+
+
+        val notificatinWork =PeriodicWorkRequestBuilder<NotificationWorker>(3L, TimeUnit.HOURS)
+            .setInitialDelay(10000, TimeUnit.MILLISECONDS)
+            .build()
+
+
+        Log.d(TAG, "Schelude notification worker")
+        WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork("HouseMenagerWorker",
+            ExistingPeriodicWorkPolicy.REPLACE, notificatinWork)
     }
 
 
