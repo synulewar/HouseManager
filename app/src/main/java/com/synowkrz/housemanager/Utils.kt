@@ -3,6 +3,7 @@ package com.synowkrz.housemanager
 import android.app.Application
 import android.graphics.Color
 import androidx.core.content.ContextCompat
+import com.synowkrz.housemanager.homeTaskList.model.HomeTask
 import com.synowkrz.housemanager.model.TaskTypes
 import com.synowkrz.housemanager.shopList.model.Category
 import com.synowkrz.housemanager.shopList.model.Measurements
@@ -13,6 +14,8 @@ val SHOP_LIST_KEY = "shopLists"
 val PERSISTENT_SHOP_KEY = "persistentShopItem"
 val SHOP_AREA_KEY = "shopArea"
 val SHOP_ITEM_KEY = "shopItem"
+val HOME_TASK = "homeTask"
+val DONE_TASK = "doneTask"
 val STORAGE_TIMELIMIT = 1000 * 60 * 60 * 24
 
 fun convertTypeTaskToResourceString(taskTypes: TaskTypes) : String {
@@ -55,5 +58,14 @@ fun getColorByCategory(category: Category, app: Application) : Int {
         Category.OTHER -> ContextCompat.getColor(app, R.color.violet)
         Category.CAN_AND_PRESERVES -> ContextCompat.getColor(app, R.color.orange)
         else -> Color.WHITE
+    }
+}
+
+
+fun getColorByExpiredTime(homeTask: HomeTask, app : Application) : Int {
+    return when(homeTask.daysExceeded) {
+         in (Int.MIN_VALUE until 0) -> Color.WHITE
+         0 -> ContextCompat.getColor(app, R.color.green)
+        else -> ContextCompat.getColor(app, R.color.red)
     }
 }

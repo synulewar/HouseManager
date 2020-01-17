@@ -79,7 +79,7 @@
     <string name="add_product">Dodaj produkt</string>
     <string name="bought_products">Pokaż kupione produkty</string>
     <string name="active_products">Pokaż listę sklepów</string>
-    <string name="close">blisko</string>
+    <string name="close">Zamknij</string>
     <string name="add_new_product">Dodaj nowy produkt</string>
     <string name="new_product_name">Nazwa produktu</string>
     <string name="water">woda</string>
@@ -101,15 +101,28 @@
     <string name="shop_area">Mapa sklepu</string>
     <string name="all_categories">Wszytskie</string>
     <string name="can_preserves_category">Konserwy i przetwory</string>
-
-
     <string name="weight">Waga</string>
     <string name="volume">Objętość</string>
     <string name="quantity">Ilość</string>
-
     <string name="feed_event">%s jadła %d min.</string>
+    <string name="new_hometask_name">Nazwa zadania</string>
+    <string name="hometask_frequency">Czestotliwość</string>
 
+    <string name="days">Dni</string>
+    <string name="weeks">Tygodnie</string>
+    <string name="months">Miesiace</string>
+    <string name="years">Lata</string>
 
+    <string name="add_new_home_task_title">Dodaj nowe zadanie</string>
+
+    <string name="delete_confirmation">Czy na pewno chcesz usunac to zadanie?</string>
+
+    <string-array name="interval_array">
+        <item>@string/days</item>
+        <item>@string/weeks</item>
+        <item>@string/months</item>
+        <item>@string/years</item>
+    </string-array>
 
     <string-array name="category_list">
         <item>@string/bread_category</item>

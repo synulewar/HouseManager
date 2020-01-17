@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+                name="property"
+                type="com.synowkrz.housemanager.homeTaskList.model.HomeTask" />
+    </data>
+
+
+    <LinearLayout android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+            <TextView android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/task_name"
+                    android:layout_margin="@dimen/standard_margin"
+                    android:text="@{property.name}"/>
+
+            <TextView android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/task_duedate"
+                    android:layout_margin="@dimen/standard_margin"
+                    android:text="@{property.dueDate.toString()}"/>
+        </LinearLayout>
+
+
+        <View android:layout_width="match_parent" android:layout_height="2dp"
+                android:background="#A29C9C"/>
+
+    </LinearLayout>
+</layout>

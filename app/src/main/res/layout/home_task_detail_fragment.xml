@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel"
+                type="com.synowkrz.housemanager.homeTaskList.homeTaskDetail.HomeTaskDetailViewModel"/>
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.synowkrz.housemanager.homeTaskList.HomeTaskListActivity">
+
+        <TextView
+                android:id="@+id/task_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/standard_text_size"
+                android:layout_margin="@dimen/standard_margin"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/done_task_list"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:padding="@dimen/frame_padding"
+                app:doneTaskata="@{viewModel.itemList}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttons"
+                tools:itemCount="8"
+                tools:listitem="@layout/done_task_list_item"/>
+
+        <LinearLayout
+                android:id="@+id/buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/task_name">
+
+
+            <ImageView
+                    android:id="@+id/delete"
+                    android:layout_width="@dimen/detail_icon_size"
+                    android:layout_height="@dimen/detail_icon_size"
+                    android:layout_margin="@dimen/standard_margin"
+                    android:layout_weight="1"
+                    android:onClick="@{() -> viewModel.onDeleteHomeTask()}"
+                    android:src="@drawable/remove_80dp" />
+
+            <ImageView
+                    android:id="@+id/edit"
+                    android:layout_width="@dimen/detail_icon_size"
+                    android:layout_height="@dimen/detail_icon_size"
+                    android:layout_margin="@dimen/standard_margin"
+                    android:layout_weight="1"
+                    android:onClick="@{() -> viewModel.onEditHomeTask()}"
+                    android:src="@drawable/edit_black_80dp" />
+
+            <ImageView
+                    android:id="@+id/done"
+                    android:layout_width="@dimen/detail_icon_size"
+                    android:layout_height="@dimen/detail_icon_size"
+                    android:layout_margin="@dimen/standard_margin"
+                    android:layout_weight="1"
+                    android:onClick="@{() -> viewModel.addNewDoneTask()}"
+                    android:src="@drawable/check_80dp" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

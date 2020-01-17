@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph_hometask"
+        app:startDestination="@id/homeTaskMainFragment">
+
+    <fragment
+            android:id="@+id/homeTaskMainFragment"
+            android:name="com.synowkrz.housemanager.homeTaskList.homeTaskMain.HomeTaskMainFragment"
+            android:label="HomeTaskMainFragment" >
+        <action
+                android:id="@+id/action_homeTaskMainFragment_to_homeTaskDetail"
+                app:destination="@id/homeTaskDetail" />
+    </fragment>
+    <fragment
+            android:id="@+id/homeTaskDetail"
+            android:name="com.synowkrz.housemanager.homeTaskList.homeTaskDetail.HomeTaskDetail"
+            android:label="HomeTaskDetail" >
+        <argument
+                android:name="name"
+                app:argType="string" />
+        <action
+                android:id="@+id/action_homeTaskDetail_to_homeTaskMainFragment"
+                app:destination="@id/homeTaskMainFragment"
+                app:launchSingleTop="true"
+                app:popUpTo="@+id/nav_graph_hometask" />
+    </fragment>
+</navigation>

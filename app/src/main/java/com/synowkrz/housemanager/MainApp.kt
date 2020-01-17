@@ -25,6 +25,8 @@ class MainApp : Application() {
         repository.registerPersistentItemListener()
         repository.registerSchopAreaListener()
         repository.registerItemListListener()
+        repository.registerHomeTaskListener()
+        repository.registerDoneTaskListener()
 
         var handlerThread = HandlerThread("update thread")
         handlerThread.start()
@@ -35,4 +37,6 @@ class MainApp : Application() {
             Log.d(TAG, "Finish syncWithRemoteDatabase")
         }, UPDATE_DELAYED)
     }
+
+
 }

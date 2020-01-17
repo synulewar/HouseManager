@@ -11,10 +11,13 @@ import com.synowkrz.housemanager.*
 import com.synowkrz.housemanager.babyTask.model.BabyProfile
 import com.synowkrz.housemanager.babyTask.model.Feeding
 import com.synowkrz.housemanager.database.HouseManagerDatabase
+import com.synowkrz.housemanager.homeTaskList.model.DoneTask
+import com.synowkrz.housemanager.homeTaskList.model.HomeTask
 import com.synowkrz.housemanager.model.TaskGridItem
 import com.synowkrz.housemanager.shopList.model.*
 import kotlinx.coroutines.*
 import java.sql.SQLException
+import java.time.LocalDate
 
 class HouseRepository(private val app: Application) {
 
@@ -24,6 +27,7 @@ class HouseRepository(private val app: Application) {
     val shopList by lazy {database.shopListDao.getAllShopList()}
     val persistentItems by lazy {database.persistentShopItemDao.getAllPersistenShopItem()}
     val shopAreas by lazy { database.shopAreaDao.getAllShopAreas() }
+    val tasks by lazy { database.homeTaskDao.getAllHomeTasks() }
     val firebaseDatabase = FirebaseDatabase.getInstance().reference
 
     private val repositoryJob = Job()
@@ -139,20 +143,63 @@ class HouseRepository(private val app: Application) {
         return database.persistentShopItemDao.getPersistentShopItemByCategory(category)
     }
 
-    suspend fun getPersistentShopItemByName(name: String) : PersistentShopItem? {
+    fun getPersistentShopItemByName(name: String) : PersistentShopItem? {
         return database.persistentShopItemDao.getPersistentShopItemByName(name)
     }
 
-    suspend fun getPersistentShopItemByNamePart(name: String) : List<PersistentShopItem>? {
+    fun getPersistentShopItemByNamePart(name: String) : List<PersistentShopItem>? {
         return database.persistentShopItemDao.getPersistentShopItemByNamePart("%${name}%")
     }
 
-    suspend fun getPersistentShopItemByNamePartAndCategory(name: String, category: Category) : List<PersistentShopItem>? {
+    fun getPersistentShopItemByNamePartAndCategory(name: String, category: Category) : List<PersistentShopItem>? {
         return database.persistentShopItemDao.getPersistentShopItemByNamePartAndCategory("%${name}%", category.toString())
     }
 
     fun getAllPersistentItems() : LiveData<List<PersistentShopItem>> {
         return database.persistentShopItemDao.getAllPersistenShopItem()
+    }
+
+    suspend fun insertNewHomeTask(homeTask: HomeTask) {
+        withContext(Dispatchers.IO) {
+            database.homeTaskDao.insert(homeTask)
+            firebaseDatabase.child(HOME_TASK).child(homeTask.name).setValue(homeTask)
+        }
+    }
+
+    suspend fun updateHomeTask(homeTask: HomeTask) {
+        withContext(Dispatchers.IO) {
+            database.homeTaskDao.update(homeTask)
+            firebaseDatabase.child(HOME_TASK).child(homeTask.name).setValue(homeTask)
+        }
+    }
+
+
+    suspend fun deleteHomeTask(homeTask: HomeTask) {
+        withContext(Dispatchers.IO) {
+            database.homeTaskDao.delete(homeTask)
+            firebaseDatabase.child(HOME_TASK).child(homeTask.name).removeValue()
+        }
+    }
+
+
+    fun getAllHomeTaskAsync() : List<HomeTask> {
+            return database.homeTaskDao.getAllTaskAsync()
+    }
+
+    fun getHomeTaskByName(name : String) : HomeTask? {
+        return database.homeTaskDao.getTaskByName(name)
+    }
+
+    suspend fun refreshTaskList() {
+        withContext(Dispatchers.IO) {
+            Log.d(TAG, "Refresh task list")
+            val taskList = getAllHomeTaskAsync()
+            for (item in taskList) {
+                item.daysExceeded = HomeTask.calculateDaysExceeded(LocalDate.parse(item.dueDate))
+                item.expired = HomeTask.isTaskExpired(LocalDate.parse(item.dueDate))
+                updateHomeTask(item)
+            }
+        }
     }
 
 
@@ -365,6 +412,115 @@ class HouseRepository(private val app: Application) {
         })
     }
 
+    fun registerHomeTaskListener() {
+        firebaseDatabase.child(HOME_TASK).addChildEventListener(object : ChildEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                Log.d(TAG, "onCancelled")
+            }
+
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+                Log.d(TAG, "onChildMoved")
+            }
+
+            override fun onChildChanged(dataSnapshot: DataSnapshot, p1: String?) {
+                Log.d(TAG, "onChildChanged")
+                val homeTask = dataSnapshot.getValue(HomeTask::class.java)
+                Log.d(TAG, "HomeTask ${homeTask?.name}")
+                homeTask?.let {
+                    repositoryScope.launch {
+                        resolveHomeTask(it)
+                    }
+                }
+            }
+
+            override fun onChildAdded(dataSnapshot: DataSnapshot, p1: String?) {
+                Log.d(TAG, "onChildAdded")
+                val homeTask = dataSnapshot.getValue(HomeTask::class.java)
+                Log.d(TAG, "HomeTask ${homeTask?.name}")
+                homeTask?.let {
+                    repositoryScope.launch {
+                        resolveHomeTask(it)
+                    }
+                }
+            }
+
+            override fun onChildRemoved(dataSnapshot: DataSnapshot) {
+               //
+            }
+
+        })
+    }
+
+
+    fun registerDoneTaskListener() {
+        firebaseDatabase.child(DONE_TASK).addChildEventListener(object : ChildEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                Log.d(TAG, "onCancelled")
+            }
+
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+                Log.d(TAG, "onChildMoved")
+            }
+
+            override fun onChildChanged(dataSnapshot: DataSnapshot, p1: String?) {
+                Log.d(TAG, "onChildChanged")
+                val doneTask = dataSnapshot.getValue(DoneTask::class.java)
+                Log.d(TAG, "HomeTask ${doneTask ?.name}")
+                doneTask ?.let {
+                    repositoryScope.launch {
+                        resolveDoneTask(it)
+                    }
+                }
+            }
+
+            override fun onChildAdded(dataSnapshot: DataSnapshot, p1: String?) {
+                Log.d(TAG, "onChildAdded")
+                val doneTask = dataSnapshot.getValue(DoneTask::class.java)
+                Log.d(TAG, "HomeTask ${doneTask ?.name}")
+                doneTask ?.let {
+                    repositoryScope.launch {
+                        resolveDoneTask(it)
+                    }
+                }
+            }
+
+            override fun onChildRemoved(dataSnapshot: DataSnapshot) {
+                Log.d(TAG, "onChildRemoved")
+                val homeTask = dataSnapshot.getValue(HomeTask::class.java)
+                Log.d(TAG, "HomeTask ${homeTask?.name}")
+                repositoryScope.launch {
+                    homeTask?.let {
+                        deleteHomeTask(it)
+                    }
+                }
+
+            }
+
+        })
+    }
+
+    suspend fun resolveDoneTask(doneTask: DoneTask) {
+        withContext(Dispatchers.IO) {
+            val item = database.doneTaskDao.getDoneTaskById(doneTask.id)
+            if (item?.id == doneTask.id) {
+                return@withContext
+            }
+            database.doneTaskDao.insert(doneTask)
+        }
+    }
+
+    suspend fun resolveHomeTask(homeTask: HomeTask) {
+        withContext(Dispatchers.IO) {
+            val item = getHomeTaskByName(homeTask.name)
+            if (item?.name == homeTask.name) {
+                Log.d(TAG, "update homeTask $homeTask")
+                database.homeTaskDao.update(homeTask)
+            } else {
+                database.homeTaskDao.insert(homeTask)
+            }
+        }
+    }
+
     suspend fun resolveShopItem(shopItem: ShopItem) {
         withContext(Dispatchers.IO) {
             val item = getShopItemById(shopItem.id)
@@ -454,7 +610,36 @@ class HouseRepository(private val app: Application) {
                 for (item in itemList) {
                     firebaseDatabase.child(SHOP_ITEM_KEY).child(item.id.toString()).setValue(item)
                 }
+
+
+                var homeTaskList = getAllHomeTaskAsync()
+                for (item in homeTaskList) {
+                    firebaseDatabase.child(HOME_TASK).child(item.name).setValue(item)
+                }
+
+                var doneTaskList = database.doneTaskDao.getAllDoneTaskAsync()
+                for (item in doneTaskList) {
+                    firebaseDatabase.child(DONE_TASK).child(item.id.toString()).setValue(item)
+                }
             }
+        }
+    }
+
+    fun getAllDoneTaskByName(name : String) : LiveData<List<DoneTask>> {
+        return database.doneTaskDao.getAllDoneTaskByName(name)
+    }
+
+    suspend fun insertNewDoneTask(doneTask: DoneTask) {
+        withContext(Dispatchers.IO) {
+            database.doneTaskDao.insert(doneTask)
+            firebaseDatabase.child(DONE_TASK).child(doneTask.id.toString()).setValue(doneTask)
+        }
+    }
+
+    suspend fun deleteDoneTask(doneTask: DoneTask) {
+        withContext(Dispatchers.IO) {
+            database.doneTaskDao.delete(doneTask)
+            firebaseDatabase.child(DONE_TASK).child(doneTask.id.toString()).removeValue()
         }
     }
 }

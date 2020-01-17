@@ -6,12 +6,17 @@ import com.synowkrz.housemanager.babyTask.model.BabyProfile
 import com.synowkrz.housemanager.babyTask.model.EventType
 import com.synowkrz.housemanager.babyTask.model.Feeding
 import com.synowkrz.housemanager.babyTask.model.FeedingType
+import com.synowkrz.housemanager.homeTaskList.model.DoneTask
+import com.synowkrz.housemanager.homeTaskList.model.HomeTask
+import com.synowkrz.housemanager.homeTaskList.model.Interval
 import com.synowkrz.housemanager.model.TaskGridItem
 import com.synowkrz.housemanager.model.TaskTypes
 import com.synowkrz.housemanager.shopList.model.*
+import java.time.LocalDate
 
-@Database(entities = [TaskGridItem::class, BabyProfile::class, Feeding::class, ShopList::class, PersistentShopItem::class, ShopItem::class, ShopArea::class],
-    version = 8, exportSchema = false)
+@Database(entities = [TaskGridItem::class, BabyProfile::class, Feeding::class, ShopList::class,
+    PersistentShopItem::class, ShopItem::class, ShopArea::class, HomeTask::class, DoneTask::class],
+    version = 10, exportSchema = false)
 @TypeConverters(CustomConverters::class)
 abstract class HouseManagerDatabase: RoomDatabase() {
 
@@ -22,6 +27,8 @@ abstract class HouseManagerDatabase: RoomDatabase() {
     abstract val persistentShopItemDao : PersistentShopItemDao
     abstract val shopItemDao : ShopItemDao
     abstract val shopAreaDao : ShopAreaDao
+    abstract val homeTaskDao : HomeTaskDao
+    abstract val doneTaskDao : DoneTaskDao
 
     companion object {
         @Volatile
@@ -93,5 +100,25 @@ class CustomConverters {
     @TypeConverter
     fun stringToCategory(value: String) : Category {
         return Category.valueOf(value)
+    }
+
+    @TypeConverter
+    fun intervalToString(value: Interval) : String {
+        return value.toString()
+    }
+
+    @TypeConverter
+    fun stringToInterval(value: String) : Interval {
+        return Interval.valueOf(value)
+    }
+
+    @TypeConverter
+    fun dateToString(value: LocalDate) : String {
+        return value.toString()
+    }
+
+    @TypeConverter
+    fun stringToDate(value: String) : LocalDate {
+        return LocalDate.parse(value)
     }
 }

@@ -12,6 +12,10 @@ import com.synowkrz.housemanager.babyTask.model.BabyEvent
 import com.synowkrz.housemanager.babyTask.model.BabyProfile
 import com.synowkrz.housemanager.babyTask.model.BasicBabyEvent
 import com.synowkrz.housemanager.babyTask.model.FeedingType
+import com.synowkrz.housemanager.homeTaskList.homeTaskDetail.DoneTaskAdpater
+import com.synowkrz.housemanager.homeTaskList.homeTaskMain.HomeTaskMainAdapter
+import com.synowkrz.housemanager.homeTaskList.model.DoneTask
+import com.synowkrz.housemanager.homeTaskList.model.HomeTask
 import com.synowkrz.housemanager.model.TaskGridItem
 import com.synowkrz.housemanager.shopList.adapters.*
 import com.synowkrz.housemanager.shopList.model.*
@@ -71,6 +75,18 @@ fun bindShopAreaData(recyclerView: RecyclerView, data: List<ShopArea>?) {
 @BindingAdapter("categoryData")
 fun bindCategoryData(recyclerView: RecyclerView, data: List<Category>?) {
     val adapter = recyclerView.adapter as AreaConfigurationAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("homeTaskData")
+fun bindHomeTaskData(recyclerView: RecyclerView, data: List<HomeTask>?) {
+    val adapter = recyclerView.adapter as HomeTaskMainAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("doneTaskata")
+fun bindDoneTaskkData(recyclerView: RecyclerView, data: List<DoneTask>?) {
+    val adapter = recyclerView.adapter as DoneTaskAdpater
     adapter.submitList(data)
 }
 

@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.synowkrz.housemanager.TaskGridAdpater
 import com.synowkrz.housemanager.babyTask.BabyActivity
 import com.synowkrz.housemanager.databinding.HomeMenuFragmentBinding
+import com.synowkrz.housemanager.homeTaskList.HomeTaskListActivity
 import com.synowkrz.housemanager.model.TaskGridItem
 import com.synowkrz.housemanager.model.TaskTypes
 import com.synowkrz.housemanager.shopList.ShopListActivity
@@ -68,7 +69,10 @@ class HomeMenu : Fragment() {
                 val intent = Intent(activity!!.applicationContext, ShopListActivity::class.java)
                 startActivity(intent)
             }
-            TaskTypes.TASK_LIST -> TODO()
+            TaskTypes.TASK_LIST -> {
+                val intent = Intent(activity!!.applicationContext, HomeTaskListActivity::class.java)
+                startActivity(intent)
+            }
             TaskTypes.CUSTOM -> TODO()
         }
     }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.synowkrz.housemanager">
+        package="com.synowkrz.housemanager">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
             android:name=".MainApp"
@@ -12,19 +12,18 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".homeTaskList.HomeTaskListActivity"></activity>
         <activity
                 android:name=".shopList.ShopListActivity"
-                android:label="@string/title_activity_shop_list">
-        </activity>
+                android:label="@string/title_activity_shop_list"></activity>
         <activity
                 android:name=".babyTask.BabyActivity"
-                android:label="@string/title_activity_baby">
-        </activity>
+                android:label="@string/title_activity_baby"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
