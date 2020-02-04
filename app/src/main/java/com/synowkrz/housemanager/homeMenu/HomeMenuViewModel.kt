@@ -8,8 +8,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeMenuViewModel(app: Application) : AndroidViewModel(app) {
+class HomeMenuViewModel @Inject constructor(val repository: HouseRepository, val app : Application) : AndroidViewModel(app) {
 
     private val _itemList = MutableLiveData<List<TaskGridItem>>()
 
@@ -23,7 +24,6 @@ class HomeMenuViewModel(app: Application) : AndroidViewModel(app) {
     private val viewModelJob = Job()
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    private val repository = HouseRepository(app)
 
 
     init {
@@ -45,13 +45,13 @@ class HomeMenuViewModel(app: Application) : AndroidViewModel(app) {
     }
 
 
-    class Factory(val app: Application) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(HomeMenuViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return HomeMenuViewModel(app) as T
-            }
-            throw IllegalArgumentException("Unable to construct viewmodel")
-        }
-    }
+//    class Factory(val app: Application) : ViewModelProvider.Factory {
+//        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+//            if (modelClass.isAssignableFrom(HomeMenuViewModel::class.java)) {
+//                @Suppress("UNCHECKED_CAST")
+//                return HomeMenuViewModel(app) as T
+//            }
+//            throw IllegalArgumentException("Unable to construct viewmodel")
+//        }
+//    }
 }

@@ -15,4 +15,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="detail_icon_size">45dp</dimen>
+    <dimen name="check_box_size">35dp</dimen>
 </resources>

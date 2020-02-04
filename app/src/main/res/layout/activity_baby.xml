@@ -40,8 +40,6 @@
                                                                            app:itemIconTint="@color/black"
                                                                            app:itemTextColor="@color/black"
                                                                            app:menu="@menu/menu_baby"/>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

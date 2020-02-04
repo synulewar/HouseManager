@@ -7,22 +7,32 @@ import android.os.HandlerThread
 import android.util.Log
 import androidx.work.*
 import com.synowkrz.housemanager.backgroundTask.NotificationWorker
+import com.synowkrz.housemanager.dagger.AppComponent
+import com.synowkrz.housemanager.dagger.AppModule
+import com.synowkrz.housemanager.dagger.DaggerAppComponent
 import com.synowkrz.housemanager.repository.HouseRepository
+import dagger.android.AndroidInjector
+import dagger.android.support.DaggerApplication
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class MainApp : Application() {
+class MainApp : DaggerApplication() {
+
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent.builder().application(this).build()
+    }
 
     companion object {
         val UPDATE_DELAYED = 10_000L
     }
 
-    private lateinit var repository : HouseRepository
+    @Inject
+    lateinit var repository : HouseRepository
 
 
     override fun onCreate() {
         super.onCreate()
         Log.d(TAG, "App is created")
-        repository = HouseRepository(this)
 
         //Register remote listeners get data from remote
         repository.registerShopListListener()
