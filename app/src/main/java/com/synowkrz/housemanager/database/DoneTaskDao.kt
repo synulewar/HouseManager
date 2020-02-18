@@ -24,4 +24,8 @@ interface DoneTaskDao {
 
     @Query("SELECT * FROM done_task")
     fun getAllDoneTaskAsync() : List<DoneTask>
+
+    @Query("SELECT * FROM done_task WHERE name = :name ORDER BY id DESC LIMIT 1")
+    fun getLatestDoneTask(name : String) : DoneTask?
+
 }

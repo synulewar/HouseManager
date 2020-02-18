@@ -27,6 +27,11 @@ data class HomeTask(@PrimaryKey val name : String ="",
             }
         }
 
+        fun calculateDueDate(timeStamp: LocalDate, homeTask: HomeTask) : LocalDate {
+            val factor = getFactor(homeTask.interval)
+            return timeStamp.plusDays((factor * homeTask.frequency).toLong())
+        }
+
 
         fun calculateDueDate(timeStamp: LocalDate, inerval : Interval, frequency: Int) : LocalDate {
             val factor = getFactor(inerval)

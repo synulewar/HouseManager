@@ -196,6 +196,10 @@ class HouseRepository(private val app: Context) {
             Log.d(TAG, "Refresh task list")
             val taskList = getAllHomeTaskAsync()
             for (item in taskList) {
+                val doneTask = database.doneTaskDao.getLatestDoneTask(item.name)
+                doneTask?.let {
+                    item.dueDate = HomeTask.calculateDueDate(LocalDate.parse(doneTask.date), item).toString()
+                }
                 item.daysExceeded = HomeTask.calculateDaysExceeded(LocalDate.parse(item.dueDate))
                 item.expired = HomeTask.isTaskExpired(LocalDate.parse(item.dueDate))
                 updateHomeTask(item)
