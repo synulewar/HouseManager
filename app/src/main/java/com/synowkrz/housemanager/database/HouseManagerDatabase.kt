@@ -6,17 +6,15 @@ import com.synowkrz.housemanager.babyTask.model.BabyProfile
 import com.synowkrz.housemanager.babyTask.model.EventType
 import com.synowkrz.housemanager.babyTask.model.Feeding
 import com.synowkrz.housemanager.babyTask.model.FeedingType
-import com.synowkrz.housemanager.homeTaskList.model.DoneTask
-import com.synowkrz.housemanager.homeTaskList.model.HomeTask
-import com.synowkrz.housemanager.homeTaskList.model.Interval
+import com.synowkrz.housemanager.homeTaskList.model.*
 import com.synowkrz.housemanager.model.TaskGridItem
 import com.synowkrz.housemanager.model.TaskTypes
 import com.synowkrz.housemanager.shopList.model.*
 import java.time.LocalDate
 
 @Database(entities = [TaskGridItem::class, BabyProfile::class, Feeding::class, ShopList::class,
-    PersistentShopItem::class, ShopItem::class, ShopArea::class, HomeTask::class, DoneTask::class],
-    version = 10, exportSchema = false)
+    PersistentShopItem::class, ShopItem::class, ShopArea::class, HomeTask::class, DoneTask::class, OneShotTask::class],
+    version = 11, exportSchema = false)
 @TypeConverters(CustomConverters::class)
 abstract class HouseManagerDatabase: RoomDatabase() {
 
@@ -29,6 +27,7 @@ abstract class HouseManagerDatabase: RoomDatabase() {
     abstract val shopAreaDao : ShopAreaDao
     abstract val homeTaskDao : HomeTaskDao
     abstract val doneTaskDao : DoneTaskDao
+    abstract val oneShotTaskDao : OneShotTaskDao
 
     companion object {
         @Volatile
@@ -120,5 +119,15 @@ class CustomConverters {
     @TypeConverter
     fun stringToDate(value: String) : LocalDate {
         return LocalDate.parse(value)
+    }
+
+    @TypeConverter
+    fun stringToOneCategory(value: String) : OneCategory {
+        return OneCategory.valueOf(value)
+    }
+
+    @TypeConverter
+    fun oneTaskToString(oneCategory: OneCategory) : String {
+        return oneCategory.toString()
     }
 }

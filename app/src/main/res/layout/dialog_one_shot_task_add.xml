@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <EditText android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/name"
+                android:layout_margin="@dimen/standard_margin"
+                android:layout_gravity="left"
+                android:textSize="@dimen/standard_text_size"
+                android:inputType="text"
+                android:hint="@string/task_name_hint"/>
+
+        <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/category_spinner"
+                android:entries="@array/one_task_category"
+                android:layout_margin="@dimen/standard_margin"/>
+
+        <DatePicker
+                android:id="@+id/picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standard_margin"
+                android:layout_gravity="center"/>
+    </LinearLayout>
+</layout>

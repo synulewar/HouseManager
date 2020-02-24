@@ -28,6 +28,7 @@ class HomeTaskListActivity : AppCompatActivity() {
         binding.navView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.task_list -> navController.navigate(R.id.homeTaskMainFragment)
+                R.id.one_shot_task_list -> navController.navigate(R.id.oneShotTaskFragment)
                 R.id.task_close -> finish()
             }
             true

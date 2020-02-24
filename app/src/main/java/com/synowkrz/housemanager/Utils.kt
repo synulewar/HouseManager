@@ -2,6 +2,7 @@ package com.synowkrz.housemanager
 
 import android.app.Application
 import android.graphics.Color
+import android.widget.DatePicker
 import androidx.core.content.ContextCompat
 import com.synowkrz.housemanager.homeTaskList.model.HomeTask
 import com.synowkrz.housemanager.model.TaskTypes
@@ -68,4 +69,19 @@ fun getColorByExpiredTime(homeTask: HomeTask, app : Application) : Int {
          0 -> ContextCompat.getColor(app, R.color.green)
         else -> ContextCompat.getColor(app, R.color.red)
     }
+}
+
+fun DatePicker.getDate(): String {
+
+    val monthValue = if (month > 10) {
+        month.toString()
+    } else {
+        "0${month}"
+    }
+
+    return "${year}-${monthValue}-${dayOfMonth}"
+}
+
+fun String.dejMnieBudyn() : String {
+    return this.plus("Budyn")
 }

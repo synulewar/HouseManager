@@ -75,6 +75,8 @@
     <string name="shower_gel">shower gel</string>
     <string name="tooth_paste">tooth paste</string>
     <string name="shop_list">Lists</string>
+    <string name="cyclic_task">Cyclic</string>
+    <string name="one_shot_task">Single</string>
     <string name="shop_items">Products</string>
     <string name="shop_paths">Shops</string>
     <string name="add_product">Add product</string>
@@ -123,11 +125,40 @@
 
     <string name="pending_tasks">%d tasks are waiting to be resolved</string>
 
+
     <string-array name="interval_array">
         <item>@string/days</item>
         <item>@string/weeks</item>
         <item>@string/months</item>
         <item>@string/years</item>
+    </string-array>
+
+    <string name="kids_category">Kids</string>
+    <string name="home_category">Flat</string>
+    <string name="new_home_category">New flat</string>
+    <string name="car_category">Car</string>
+    <string name="shop_category">Shop</string>
+    <string name="phone_category">Phone</string>
+
+    <string-array name="one_task_category">
+        <item>@string/kids_category</item>
+        <item>@string/home_category</item>
+        <item>@string/new_home_category</item>
+        <item>@string/car_category</item>
+        <item>@string/shop_category</item>
+        <item>@string/phone_category</item>
+        <item>@string/other_category</item>
+    </string-array>
+
+    <string-array name="one_task_categor_with_all">
+        <item>@string/all_categories</item>
+        <item>@string/kids_category</item>
+        <item>@string/home_category</item>
+        <item>@string/new_home_category</item>
+        <item>@string/car_category</item>
+        <item>@string/shop_category</item>
+        <item>@string/phone_category</item>
+        <item>@string/other_category</item>
     </string-array>
 
     <string-array name="category_list">

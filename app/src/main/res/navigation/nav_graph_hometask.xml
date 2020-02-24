@@ -10,6 +10,9 @@
         <action
                 android:id="@+id/action_homeTaskMainFragment_to_homeTaskDetail"
                 app:destination="@id/homeTaskDetail" />
+        <action
+                android:id="@+id/action_homeTaskMainFragment_to_oneShotTaskFragment"
+                app:destination="@id/oneShotTaskFragment" />
     </fragment>
     <fragment
             android:id="@+id/homeTaskDetail"
@@ -23,5 +26,13 @@
                 app:destination="@id/homeTaskMainFragment"
                 app:launchSingleTop="true"
                 app:popUpTo="@+id/nav_graph_hometask" />
+    </fragment>
+    <fragment
+            android:id="@+id/oneShotTaskFragment"
+            android:name="com.synowkrz.housemanager.homeTaskList.oneShotTask.OneShotTaskFragment"
+            android:label="OneShotTaskFragment" >
+        <action
+                android:id="@+id/action_oneShotTaskFragment_to_homeTaskMainFragment"
+                app:destination="@id/homeTaskMainFragment" />
     </fragment>
 </navigation>

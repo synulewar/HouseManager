@@ -16,6 +16,9 @@ import com.synowkrz.housemanager.homeTaskList.homeTaskDetail.DoneTaskAdpater
 import com.synowkrz.housemanager.homeTaskList.homeTaskMain.HomeTaskMainAdapter
 import com.synowkrz.housemanager.homeTaskList.model.DoneTask
 import com.synowkrz.housemanager.homeTaskList.model.HomeTask
+import com.synowkrz.housemanager.homeTaskList.model.OneCategory
+import com.synowkrz.housemanager.homeTaskList.model.OneShotTask
+import com.synowkrz.housemanager.homeTaskList.oneShotTask.OneShotTaskAdapter
 import com.synowkrz.housemanager.model.TaskGridItem
 import com.synowkrz.housemanager.shopList.adapters.*
 import com.synowkrz.housemanager.shopList.model.*
@@ -90,6 +93,12 @@ fun bindDoneTaskkData(recyclerView: RecyclerView, data: List<DoneTask>?) {
     adapter.submitList(data)
 }
 
+@BindingAdapter("oneShotAdapter")
+fun bindOneShotData(recyclerView: RecyclerView, data: List<OneShotTask>?) {
+    val adapter = recyclerView.adapter as OneShotTaskAdapter
+    adapter.submitList(data)
+}
+
 
 @BindingAdapter("setImage")
 fun bindImageView(imageView: ImageView, data: String) {
@@ -130,6 +139,19 @@ fun bindTextViewWithBabyName(textView: TextView, data: BabyProfile?) {
         return
     }
     textView.text = data.name
+}
+
+@BindingAdapter("imgByCategory")
+fun bindCategoryToImageView(imageView: ImageView, category: OneCategory) {
+    when(category) {
+        OneCategory.KIDS -> imageView.setImageResource(R.drawable.kid)
+        OneCategory.HOME -> imageView.setImageResource(R.drawable.home)
+        OneCategory.NEW_HOME -> imageView.setImageResource(R.drawable.rozanka)
+        OneCategory.CAR -> imageView.setImageResource(R.drawable.car)
+        OneCategory.SHOP -> imageView.setImageResource(R.drawable.shoplist)
+        OneCategory.PHONE -> imageView.setImageResource(R.drawable.phone)
+        OneCategory.OTHER -> imageView.setImageResource(R.drawable.todo)
+    }
 }
 
 fun trasformStringIntoResource(data: String) : Int {

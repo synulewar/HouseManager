@@ -3,8 +3,14 @@
 
     <item
             android:id="@+id/task_list"
+            android:icon="@drawable/cyclic_task_24dp"
+            android:title="@string/cyclic_task"/>
+
+    <item
+            android:id="@+id/one_shot_task_list"
             android:icon="@drawable/ic_list_black_24dp"
-            android:title="@string/shop_list"/>
+            android:title="@string/one_shot_task"/>
+
 
     <item
             android:id="@+id/task_close"

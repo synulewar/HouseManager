@@ -49,15 +49,4 @@ class BabyManager : Fragment() {
         return binding.root
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?) {
-        menu?.clear()
-        if (viewModel.currentProfileList != null) {
-            for (profile: BabyProfile in viewModel?.currentProfileList ?: listOf()) {
-                menu?.add(profile.name)
-            }
-        } else {
-            menu?.add("DummyItem") //it makes UI ready from the start
-        }
-        super.onPrepareOptionsMenu(menu)
-    }
 }

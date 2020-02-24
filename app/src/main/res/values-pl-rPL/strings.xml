@@ -74,6 +74,8 @@
     <string name="shower_gel">żel pod prysznic</string>
     <string name="tooth_paste">pasta do zębów</string>
     <string name="shop_list">Listy</string>
+    <string name="cyclic_task">Cykliczne</string>
+    <string name="one_shot_task">Jednorazowe</string>
     <string name="shop_items">Produkty</string>
     <string name="shop_paths">Sklepy</string>
     <string name="add_product">Dodaj produkt</string>
@@ -125,6 +127,13 @@
         <item>@string/months</item>
         <item>@string/years</item>
     </string-array>
+
+    <string name="kids_category">Dzieci</string>
+    <string name="home_category">Mieszkanie</string>
+    <string name="new_home_category">Nowe mieszkanie</string>
+    <string name="car_category">Samochód</string>
+    <string name="shop_category">Zakupy</string>
+    <string name="phone_category">Telefon</string>
 
     <string-array name="category_list">
         <item>@string/bread_category</item>

@@ -14,6 +14,8 @@ import com.synowkrz.housemanager.babyTask.model.Feeding
 import com.synowkrz.housemanager.database.HouseManagerDatabase
 import com.synowkrz.housemanager.homeTaskList.model.DoneTask
 import com.synowkrz.housemanager.homeTaskList.model.HomeTask
+import com.synowkrz.housemanager.homeTaskList.model.OneCategory
+import com.synowkrz.housemanager.homeTaskList.model.OneShotTask
 import com.synowkrz.housemanager.model.TaskGridItem
 import com.synowkrz.housemanager.shopList.model.*
 import kotlinx.coroutines.*
@@ -29,6 +31,10 @@ class HouseRepository(private val app: Context) {
     val persistentItems by lazy {database.persistentShopItemDao.getAllPersistenShopItem()}
     val shopAreas by lazy { database.shopAreaDao.getAllShopAreas() }
     val tasks by lazy { database.homeTaskDao.getAllHomeTasks() }
+    val oneTaskToDo by lazy {database.oneShotTaskDao.getAllTaskToDo()}
+    val oneTaskDone by lazy {
+        Log.d(TAG, "Done task called!")
+        database.oneShotTaskDao.getAllDoneTask()}
     val firebaseDatabase = FirebaseDatabase.getInstance().reference
 
     private val repositoryJob = Job()
@@ -647,4 +653,37 @@ class HouseRepository(private val app: Context) {
             firebaseDatabase.child(DONE_TASK).child(doneTask.id.toString()).removeValue()
         }
     }
+
+    suspend fun inserNewOneShotTask(oneShotTask: OneShotTask) {
+        withContext(Dispatchers.IO) {
+            database.oneShotTaskDao.insert(oneShotTask)
+        }
+    }
+
+    suspend fun deleteOneShotTask(oneShotTask: OneShotTask) {
+        withContext(Dispatchers.IO) {
+            database.oneShotTaskDao.delete(oneShotTask)
+        }
+    }
+
+    suspend fun updateOneShotTask(oneShotTask: OneShotTask) {
+        withContext(Dispatchers.IO) {
+            database.oneShotTaskDao.update(oneShotTask)
+        }
+    }
+
+    suspend fun getAllOneTaskAsync() : List<OneShotTask> {
+        return withContext(Dispatchers.IO) {
+            return@withContext database.oneShotTaskDao.getAllTaskAsync()
+        }
+    }
+
+    fun getAllOneTaskToDoByCategory(oneCategory: OneCategory) : LiveData<List<OneShotTask>> {
+       return database.oneShotTaskDao.getAllTaskToDoByCategory(oneCategory.toString())
+    }
+
+    fun getAllOneTaskDoneByCategory(oneCategory: OneCategory) : LiveData<List<OneShotTask>> {
+        return database.oneShotTaskDao.getAllDoneTaskByCategory(oneCategory.toString())
+    }
+
 }
