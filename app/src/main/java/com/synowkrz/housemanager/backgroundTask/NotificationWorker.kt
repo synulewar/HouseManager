@@ -43,6 +43,7 @@ class NotificationWorker(val appContext : Context, workerParams: WorkerParameter
         if (taskToBeDone > 0 ) {
             sendNotification(taskToBeDone)
         }
+
         return Result.success()
     }
 

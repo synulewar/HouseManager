@@ -41,6 +41,7 @@ class MainApp : DaggerApplication() {
         repository.registerItemListListener()
         repository.registerHomeTaskListener()
         repository.registerDoneTaskListener()
+        repository.registerOneShotListener()
 
         var handlerThread = HandlerThread("update thread")
         handlerThread.start()

@@ -17,6 +17,7 @@ val SHOP_AREA_KEY = "shopArea"
 val SHOP_ITEM_KEY = "shopItem"
 val HOME_TASK = "homeTask"
 val DONE_TASK = "doneTask"
+val ONE_SHOT_TASK = "oneShotTask"
 val STORAGE_TIMELIMIT = 1000 * 60 * 60 * 24
 
 fun convertTypeTaskToResourceString(taskTypes: TaskTypes) : String {
@@ -73,15 +74,19 @@ fun getColorByExpiredTime(homeTask: HomeTask, app : Application) : Int {
 
 fun DatePicker.getDate(): String {
 
-    val monthValue = if (month > 10) {
-        month.toString()
+    val tmpMonth = month + 1
+    val monthValue = if (tmpMonth > 10) {
+        tmpMonth.toString()
     } else {
-        "0${month}"
+        "0${tmpMonth}"
     }
 
-    return "${year}-${monthValue}-${dayOfMonth}"
-}
 
-fun String.dejMnieBudyn() : String {
-    return this.plus("Budyn")
+    val dayValue = if (dayOfMonth > 10) {
+        dayOfMonth.toString()
+    } else {
+        "0${dayOfMonth}"
+    }
+
+    return "${year}-${monthValue}-${dayValue}"
 }

@@ -18,7 +18,6 @@ import com.synowkrz.housemanager.R
 import com.synowkrz.housemanager.dagger.ViewModelFactory
 import com.synowkrz.housemanager.databinding.DialogOneShotTaskAddBinding
 import com.synowkrz.housemanager.databinding.OneShotTaskFragmentBinding
-import com.synowkrz.housemanager.dejMnieBudyn
 import com.synowkrz.housemanager.getDate
 import com.synowkrz.housemanager.homeTaskList.model.OneCategory
 import com.synowkrz.housemanager.homeTaskList.model.OneShotTask
@@ -58,12 +57,10 @@ class OneShotTaskFragment : DaggerFragment() {
 
         binding.categorySpinnerSearch.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                Toast.makeText(context, "Nothing selected", Toast.LENGTH_SHORT).show()
             }
 
             override fun onItemSelected(adapter: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val stringArray = resources.getStringArray(R.array.one_task_categor_with_all)
-                Toast.makeText(context, stringArray[position], Toast.LENGTH_SHORT).show()
                 categoryPosition = position
                 oneViewModel.changeDataSource(stringArray[position])
             }
@@ -90,6 +87,12 @@ class OneShotTaskFragment : DaggerFragment() {
         val dialog = AlertDialog.Builder(activity)
         val binding = DialogOneShotTaskAddBinding.inflate(layoutInflater)
         dialog.setView(binding.root)
+        categoryPosition?.let {
+            if (it != 0) {
+                binding.categorySpinner.setSelection(it - 1)
+            }
+        }
+
         dialog.setPositiveButton(android.R.string.ok) { d, i ->
             val name = binding.name.text.toString()
             val date = binding.picker.getDate()

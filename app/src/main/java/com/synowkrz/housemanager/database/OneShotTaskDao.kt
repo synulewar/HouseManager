@@ -31,4 +31,8 @@ interface OneShotTaskDao {
     @Query("SELECT * FROM one_shot_home_task")
     fun getAllTaskAsync() : List<OneShotTask>
 
+    @Query("SELECT * FROM one_shot_home_task WHERE id = :id")
+    fun getOneShotTaskById(id : Long) : OneShotTask?
+
+
 }

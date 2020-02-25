@@ -1,6 +1,5 @@
 package com.synowkrz.housemanager.repository
 
-import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -209,6 +208,12 @@ class HouseRepository(private val app: Context) {
                 item.daysExceeded = HomeTask.calculateDaysExceeded(LocalDate.parse(item.dueDate))
                 item.expired = HomeTask.isTaskExpired(LocalDate.parse(item.dueDate))
                 updateHomeTask(item)
+            }
+
+            val oneShotTaskList = getAllOneTaskAsync()
+            for (item in oneShotTaskList) {
+                item.refreshTask()
+                updateOneShotTask(item)
             }
         }
     }
@@ -510,6 +515,61 @@ class HouseRepository(private val app: Context) {
         })
     }
 
+    fun registerOneShotListener() {
+        firebaseDatabase.child(ONE_SHOT_TASK).addChildEventListener(object : ChildEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                Log.d(TAG, "onCancelled")
+            }
+
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+
+            }
+
+            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                val oneShotTask = p0.getValue(OneShotTask::class.java)
+                Log.d(TAG, "OneShotTask ${oneShotTask?.name}")
+                repositoryScope.launch {
+                    oneShotTask?.let {
+                        resolveOneShotTask(it)
+                    }
+                }
+            }
+
+            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                val oneShotTask = p0.getValue(OneShotTask::class.java)
+                Log.d(TAG, "OneShotTask ${oneShotTask?.name}")
+                repositoryScope.launch {
+                    oneShotTask?.let {
+                        resolveOneShotTask(it)
+                    }
+                }
+            }
+
+            override fun onChildRemoved(p0: DataSnapshot) {
+                Log.d(TAG, "onChildRemoved")
+                val oneShot = p0.getValue(OneShotTask::class.java)
+                Log.d(TAG, "OneShotTask ${oneShot?.name}")
+                repositoryScope.launch {
+                    oneShot?.let {
+                        deleteOneShotTask(it)
+                    }
+                }
+            }
+
+        })
+    }
+
+    suspend fun resolveOneShotTask(oneShotTask: OneShotTask) {
+        withContext(Dispatchers.IO) {
+            val item = database.oneShotTaskDao.getOneShotTaskById(oneShotTask.id)
+            if (item?.id == oneShotTask.id) {
+                database.oneShotTaskDao.update(oneShotTask)
+            } else {
+                database.oneShotTaskDao.insert(oneShotTask)
+            }
+        }
+    }
+
     suspend fun resolveDoneTask(doneTask: DoneTask) {
         withContext(Dispatchers.IO) {
             val item = database.doneTaskDao.getDoneTaskById(doneTask.id)
@@ -632,6 +692,11 @@ class HouseRepository(private val app: Context) {
                 for (item in doneTaskList) {
                     firebaseDatabase.child(DONE_TASK).child(item.id.toString()).setValue(item)
                 }
+
+                var oneShotTaskList = getAllOneTaskAsync()
+                for (item in oneShotTaskList) {
+                    firebaseDatabase.child(ONE_SHOT_TASK).child(item.id.toString()).setValue(item)
+                }
             }
         }
     }
@@ -657,18 +722,21 @@ class HouseRepository(private val app: Context) {
     suspend fun inserNewOneShotTask(oneShotTask: OneShotTask) {
         withContext(Dispatchers.IO) {
             database.oneShotTaskDao.insert(oneShotTask)
+            firebaseDatabase.child(ONE_SHOT_TASK).child(oneShotTask.id.toString()).setValue(oneShotTask)
         }
     }
 
     suspend fun deleteOneShotTask(oneShotTask: OneShotTask) {
         withContext(Dispatchers.IO) {
             database.oneShotTaskDao.delete(oneShotTask)
+            firebaseDatabase.child(ONE_SHOT_TASK).child(oneShotTask.id.toString()).removeValue()
         }
     }
 
     suspend fun updateOneShotTask(oneShotTask: OneShotTask) {
         withContext(Dispatchers.IO) {
             database.oneShotTaskDao.update(oneShotTask)
+            firebaseDatabase.child(ONE_SHOT_TASK).child(oneShotTask.id.toString()).setValue(oneShotTask)
         }
     }
 

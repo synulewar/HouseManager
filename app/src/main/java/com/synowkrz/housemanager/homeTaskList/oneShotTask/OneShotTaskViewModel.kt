@@ -1,13 +1,8 @@
 package com.synowkrz.housemanager.homeTaskList.oneShotTask
 
 import android.app.Application
-import android.util.Log
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.synowkrz.housemanager.R
-import com.synowkrz.housemanager.TAG
 import com.synowkrz.housemanager.homeTaskList.model.OneCategory
 import com.synowkrz.housemanager.homeTaskList.model.OneShotTask
 import com.synowkrz.housemanager.repository.HouseRepository
@@ -16,8 +11,15 @@ import javax.inject.Inject
 
 class OneShotTaskViewModel @Inject constructor(val repository: HouseRepository, val app : Application) : AndroidViewModel(app) {
 
-    var toDoList : LiveData<List<OneShotTask>> = repository.oneTaskToDo
-    var doneList : LiveData<List<OneShotTask>> = repository.oneTaskDone
+    var toDoList = MediatorLiveData<List<OneShotTask>>()
+    var doneList = MediatorLiveData<List<OneShotTask>>()
+
+    var currentToDo : LiveData<List<OneShotTask>> = repository.oneTaskToDo
+    var currentDone : LiveData<List<OneShotTask>> = repository.oneTaskDone
+
+    init {
+        refreshDataSource()
+    }
 
 
     private val _newTak = MutableLiveData<Boolean>()
@@ -46,18 +48,32 @@ class OneShotTaskViewModel @Inject constructor(val repository: HouseRepository, 
     }
 
     fun changeDataSource(category : String) {
-
+        removeDataSource()
         if (category == app.getString(R.string.all_categories)) {
-            toDoList = repository.oneTaskToDo
-            doneList =repository.oneTaskDone
+            currentToDo = repository.oneTaskToDo
+            currentDone = repository.oneTaskDone
         } else {
+            val one = getCategoryFromString(category)
+            currentToDo = repository.getAllOneTaskToDoByCategory(one)
+            currentDone = repository.getAllOneTaskDoneByCategory(one)
+        }
+        refreshDataSource()
+    }
 
-            var one = getCategoryFromString(category)
-            toDoList = repository.getAllOneTaskToDoByCategory(one)
-            doneList = repository.getAllOneTaskDoneByCategory(one)
+    fun removeDataSource() {
+        toDoList.removeSource(currentToDo)
+        doneList.removeSource(currentDone)
+    }
+
+
+    fun refreshDataSource() {
+        toDoList.addSource(currentToDo) {
+            toDoList.value = it
         }
 
-
+        doneList.addSource(currentDone) {
+            doneList.value = it
+        }
     }
 
 
@@ -72,6 +88,4 @@ class OneShotTaskViewModel @Inject constructor(val repository: HouseRepository, 
             else -> OneCategory.OTHER
         }
     }
-
-
 }
