@@ -48,7 +48,7 @@ class InactiveShoppingListViewModel(app: Application, val listName: String) : An
 
 
     class Factory(val app: Application, val listName: String) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(InactiveShoppingListViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return InactiveShoppingListViewModel(app, listName) as T

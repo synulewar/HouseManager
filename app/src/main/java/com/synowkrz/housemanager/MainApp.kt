@@ -1,19 +1,13 @@
 package com.synowkrz.housemanager
 
-import android.app.Application
-import android.app.Notification
+
 import android.os.Handler
 import android.os.HandlerThread
 import android.util.Log
-import androidx.work.*
-import com.synowkrz.housemanager.backgroundTask.NotificationWorker
-import com.synowkrz.housemanager.dagger.AppComponent
-import com.synowkrz.housemanager.dagger.AppModule
 import com.synowkrz.housemanager.dagger.DaggerAppComponent
 import com.synowkrz.housemanager.repository.HouseRepository
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MainApp : DaggerApplication() {
@@ -52,15 +46,18 @@ class MainApp : DaggerApplication() {
             Log.d(TAG, "Finish syncWithRemoteDatabase")
         }, UPDATE_DELAYED)
 
+// Removed for now
+//        WorkManager.getInstance(applicationContext).cancelAllWork()
+//        val notificatinWork = PeriodicWorkRequestBuilder<NotificationWorker>(3L, TimeUnit.HOURS)
+//            .setInitialDelay(10000, TimeUnit.MILLISECONDS)
+//            .build()
+//
+//
+//        WorkManager.getInstance(applicationContext).cancelAllWork()
 
-        val notificatinWork =PeriodicWorkRequestBuilder<NotificationWorker>(3L, TimeUnit.HOURS)
-            .setInitialDelay(10000, TimeUnit.MILLISECONDS)
-            .build()
-
-
-        Log.d(TAG, "Schelude notification worker")
-        WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork("HouseMenagerWorker",
-            ExistingPeriodicWorkPolicy.REPLACE, notificatinWork)
+//        Log.d(TAG, "Schelude notification worker")
+//        WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork("HouseMenagerWorker",
+//            ExistingPeriodicWorkPolicy.REPLACE, notificatinWork)
     }
 
 

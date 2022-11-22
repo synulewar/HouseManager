@@ -110,7 +110,7 @@ class ShopListViewModel(val app: Application) : AndroidViewModel(app) {
 
 
     class Factory(val app: Application) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(ShopListViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return ShopListViewModel(app) as T

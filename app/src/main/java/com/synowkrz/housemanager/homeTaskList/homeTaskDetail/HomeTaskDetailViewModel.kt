@@ -94,7 +94,7 @@ class HomeTaskDetailViewModel(val app : Application, val name : String) : Androi
     }
 
     class Factory(val app: Application, val name : String) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(HomeTaskDetailViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return HomeTaskDetailViewModel(app, name) as T

@@ -40,7 +40,6 @@ abstract class HouseManagerDatabase: RoomDatabase() {
                     instance = Room.databaseBuilder(context.applicationContext,
                         HouseManagerDatabase::class.java,
                         "house_manager_database")
-                        .fallbackToDestructiveMigration()
                         .build()
                 }
                 INSTANCE = instance

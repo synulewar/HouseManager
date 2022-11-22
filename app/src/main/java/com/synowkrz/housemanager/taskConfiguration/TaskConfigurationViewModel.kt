@@ -65,7 +65,7 @@ class TaskConfigurationViewModel(app: Application, val taskType: TaskTypes) : An
     }
 
     class Factory(val app: Application, val taskType: TaskTypes) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(TaskConfigurationViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return TaskConfigurationViewModel(app, taskType) as T

@@ -185,7 +185,7 @@ class FeedingViewModel(val app: Application, val name: String): AndroidViewModel
     }
 
     class Factory(val app: Application, val profileName: String) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(FeedingViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return FeedingViewModel(app, profileName) as T

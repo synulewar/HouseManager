@@ -12,14 +12,16 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".homeTaskList.HomeTaskListActivity"></activity>
+        <activity android:name=".homeTaskList.HomeTaskListActivity" />
         <activity
                 android:name=".shopList.ShopListActivity"
-                android:label="@string/title_activity_shop_list"></activity>
+                android:label="@string/title_activity_shop_list" />
         <activity
                 android:name=".babyTask.BabyActivity"
-                android:label="@string/title_activity_baby"></activity>
-        <activity android:name=".MainActivity">
+                android:label="@string/title_activity_baby" />
+        <activity
+                android:name=".MainActivity"
+                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

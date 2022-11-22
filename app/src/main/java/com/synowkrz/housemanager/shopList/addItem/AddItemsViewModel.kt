@@ -95,7 +95,7 @@ class AddItemsViewModel(val app: Application, val listName: String) : AndroidVie
     }
 
     class Factory(val app: Application, val listName: String) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AddItemsViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return AddItemsViewModel(app, listName ) as T

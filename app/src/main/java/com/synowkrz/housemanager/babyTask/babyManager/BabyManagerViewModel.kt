@@ -44,7 +44,7 @@ class BabyManagerViewModel(app: Application, val name: String) : AndroidViewMode
     }
 
     class Factory(val app: Application, val name: String) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(BabyManagerViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return BabyManagerViewModel(app, name) as T

@@ -47,11 +47,11 @@ class BabyEventListAdapter(val onBabyEventClickListener: OnBabyEventClickListene
     class BabyEventViewHolder(val binding: BabyEventListItemBinding, val app: Application) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(event: BabyEvent) {
             when(event.babyEvent.eventType) {
-                  EventType.FEED -> bindFeedEvent(event)
-//                EventType.DIAPER -> TODO()
-//                EventType.SLEEP -> TODO()
-//                EventType.BATH -> TODO()
-//                EventType.PILLS -> TODO()
+                EventType.FEED -> bindFeedEvent(event)
+                EventType.DIAPER -> TODO()
+                EventType.SLEEP -> TODO()
+                EventType.BATH -> TODO()
+                EventType.PILLS -> TODO()
             }
         }
 

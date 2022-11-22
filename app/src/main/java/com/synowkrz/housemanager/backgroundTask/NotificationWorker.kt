@@ -3,7 +3,8 @@ package com.synowkrz.housemanager.backgroundTask
 import android.app.Notification.DEFAULT_ALL
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent.getActivity
+import android.app.PendingIntent
+import android.app.PendingIntent.*
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
@@ -68,7 +69,7 @@ class NotificationWorker(val appContext : Context, workerParams: WorkerParameter
 
         val title = appContext.getString(R.string.app_name)
         val subtitle = String.format(appContext.getString(R.string.pending_tasks), taksToBeDone)
-        val pendingIntent = getActivity(applicationContext, 0, intent, 0)
+        val pendingIntent = getActivity(applicationContext, 0, intent, FLAG_IMMUTABLE)
 
         val notification = NotificationCompat.Builder(applicationContext, id)
             .setSmallIcon(R.drawable.tasklist)

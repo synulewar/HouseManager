@@ -93,7 +93,7 @@ class ShopAreaConfiguratorViewModel(val app: Application, val shopAreaName: Stri
     }
 
     class Factory(val app: Application, val shopAreaName: String) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(ShopAreaConfiguratorViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return ShopAreaConfiguratorViewModel(app, shopAreaName) as T

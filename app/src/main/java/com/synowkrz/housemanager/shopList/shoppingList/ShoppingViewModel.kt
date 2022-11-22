@@ -86,7 +86,7 @@ class ShoppingViewModel(val app: Application, val listName: String, val sortStri
     }
 
     class Factory(val app: Application, val listName: String, val sortString: String) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(ShoppingViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return ShoppingViewModel(app, listName, sortString) as T
