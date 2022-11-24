@@ -171,5 +171,9 @@
         <item>@string/volume</item>
     </string-array>
 
+    <string name="category_shop">Zakupy</string>
+    <string name="category_task">Zadania</string>
+    <string name="category_calendar">Kalendarz</string>
+
 
 </resources>
